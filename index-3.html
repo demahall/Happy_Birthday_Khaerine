@@ -1,0 +1,2862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For Khaerine 🌸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@400;500;600;700&family=Pacifico&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --pink: #f4a7b9;
+      --pink-light: #fce4ec;
+      --pink-deep: #e57a99;
+      --lavender: #d4b8e0;
+      --lavender-light: #f0e6f6;
+      --cream: #fff8f0;
+      --peach: #ffcba4;
+      --mint: #b5ead7;
+      --yellow: #fff0a0;
+      --text: #5a3e4b;
+      --text-light: #9c7a88;
+      --white: #ffffff;
+      --shadow: 0 8px 40px rgba(229,122,153,0.18);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:'Quicksand',sans-serif;
+      background:var(--cream);
+      color:var(--text);
+      overflow-x:hidden;
+      min-height:100vh;
+    }
+
+    /* ══════════════════════════════
+       PAGE SYSTEM
+    ══════════════════════════════ */
+    .page {
+      display:none;
+      min-height:100vh;
+      width:100%;
+      animation:pageIn 0.5s ease both;
+    }
+    .page.active { display:flex; flex-direction:column; }
+    @keyframes pageIn {
+      from { opacity:0; transform:translateY(16px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* ══════════════════════════════
+       SHARED COMPONENTS
+    ══════════════════════════════ */
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:14px 28px; border-radius:50px; border:none; cursor:pointer;
+      font-family:'Quicksand',sans-serif; font-weight:700; font-size:1rem;
+      transition:transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    }
+    .btn:active { transform:scale(0.96); }
+    .btn-primary {
+      background:linear-gradient(135deg, var(--pink-deep), var(--lavender));
+      color:white;
+      box-shadow:0 6px 20px rgba(229,122,153,0.35);
+    }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 10px 28px rgba(229,122,153,0.45); }
+    .btn-secondary {
+      background:white; color:var(--pink-deep);
+      border:2px solid var(--pink);
+    }
+    .btn-ghost {
+      background:rgba(255,255,255,0.7); color:var(--text);
+      border:1.5px solid rgba(244,167,185,0.4);
+    }
+    .btn:disabled, .btn.disabled {
+      opacity:0.4; cursor:not-allowed; transform:none !important;
+      box-shadow:none !important;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      display:none; position:fixed; inset:0; z-index:1000;
+      background:rgba(90,62,75,0.35); backdrop-filter:blur(4px);
+      align-items:center; justify-content:center; padding:24px;
+    }
+    .modal-overlay.open { display:flex; }
+    .modal-box {
+      background:white; border-radius:24px; padding:32px 28px;
+      max-width:340px; width:100%; text-align:center;
+      box-shadow:0 20px 60px rgba(90,62,75,0.2);
+      animation:modalIn 0.35s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    @keyframes modalIn {
+      from { opacity:0; transform:scale(0.85) translateY(20px); }
+      to   { opacity:1; transform:scale(1) translateY(0); }
+    }
+    .modal-emoji { font-size:2.5rem; margin-bottom:12px; }
+    .modal-title { font-family:'Pacifico',cursive; font-size:1.3rem; color:var(--pink-deep); margin-bottom:8px; }
+    .modal-sub   { font-size:0.9rem; color:var(--text-light); margin-bottom:24px; line-height:1.6; }
+    .modal-btns  { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+
+    /* Section title */
+    .sec-title {
+      font-family:'Pacifico',cursive;
+      font-size:clamp(1.6rem,7vw,2.4rem);
+      background:linear-gradient(135deg,var(--pink-deep),var(--lavender));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      text-align:center; line-height:1.2;
+    }
+    .sec-sub { text-align:center; color:var(--text-light); font-size:0.88rem; font-style:italic; margin-top:6px; }
+
+
+    /* ══════════════════════════════
+       PAGE 1 — PASSWORD
+    ══════════════════════════════ */
+    #page-password {
+      background:linear-gradient(160deg,#ffe4f0 0%,#f0d6f5 50%,#ffe8d6 100%);
+      align-items:center; justify-content:center; padding:40px 24px; gap:0;
+    }
+    .pw-card {
+      background:rgba(255,255,255,0.85); backdrop-filter:blur(12px);
+      border-radius:28px; padding:44px 32px; max-width:380px; width:100%;
+      box-shadow:var(--shadow); border:1.5px solid rgba(244,167,185,0.3);
+      text-align:center; position:relative;
+    }
+    .pw-lock { font-size:3.2rem; margin-bottom:16px; animation:lockBounce 2s ease-in-out infinite; }
+    @keyframes lockBounce {
+      0%,100%{transform:translateY(0) rotate(-5deg);}
+      50%{transform:translateY(-8px) rotate(5deg);}
+    }
+    .pw-title { font-family:'Pacifico',cursive; font-size:1.8rem; color:var(--pink-deep); margin-bottom:6px; }
+    .pw-sub   { font-size:0.88rem; color:var(--text-light); margin-bottom:28px; }
+    .pw-input-wrap { position:relative; margin-bottom:8px; }
+    .pw-input {
+      width:100%; padding:16px 20px; border-radius:16px;
+      border:2px solid var(--pink-light); font-family:'Quicksand',sans-serif;
+      font-size:1.2rem; letter-spacing:0.3em; text-align:center;
+      background:var(--pink-light); color:var(--text); outline:none;
+      transition:border-color 0.3s;
+    }
+    .pw-input:focus { border-color:var(--pink-deep); background:white; }
+    .pw-input.error { border-color:#e57373; background:#fff5f5; animation:shake 0.4s ease; }
+    @keyframes shake {
+      0%,100%{transform:translateX(0);}
+      25%{transform:translateX(-8px);}
+      75%{transform:translateX(8px);}
+    }
+    .pw-hint {
+      font-size:0.8rem; color:var(--text-light); font-style:italic;
+      margin-top:10px; display:flex; align-items:center; justify-content:center; gap:5px;
+    }
+    .pw-error { color:#e57373; font-size:0.82rem; margin-top:8px; min-height:20px; }
+    .pw-btn { margin-top:24px; width:100%; font-size:1.05rem; padding:16px; }
+    .floating-deco {
+      position:absolute; pointer-events:none; font-size:1.2rem; opacity:0.3;
+      animation:floatDeco 4s ease-in-out infinite;
+    }
+    @keyframes floatDeco {
+      0%,100%{transform:translateY(0) rotate(0deg);}
+      50%{transform:translateY(-10px) rotate(15deg);}
+    }
+
+
+    /* ══════════════════════════════
+       PAGE 2 — HOMEPAGE
+    ══════════════════════════════ */
+    #page-home {
+      background:linear-gradient(160deg,#ffe4f0 0%,#f0d6f5 50%,#ffe8d6 100%);
+      align-items:center; padding:48px 24px 40px; gap:24px;
+    }
+    .home-greeting { font-size:0.85rem; color:var(--text-light); letter-spacing:0.15em; text-transform:uppercase; font-weight:700; }
+    .home-title { font-family:'Pacifico',cursive; font-size:clamp(2rem,10vw,3.2rem); text-align:center; line-height:1.1;
+      background:linear-gradient(135deg,var(--pink-deep),var(--lavender),var(--peach));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    }
+    .home-cards { display:flex; flex-direction:column; gap:16px; max-width:420px; width:100%; margin-top:8px; }
+    .home-card {
+      background:white; border-radius:24px; padding:24px 22px;
+      box-shadow:var(--shadow); border:2px solid transparent;
+      cursor:pointer; transition:transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+      display:flex; align-items:center; gap:18px; position:relative; overflow:hidden;
+    }
+    .home-card:hover { transform:translateY(-3px); box-shadow:0 14px 50px rgba(229,122,153,0.28); border-color:var(--pink); }
+    .home-card:active { transform:scale(0.98); }
+    .home-card.locked { cursor:not-allowed; opacity:0.65; }
+    .home-card.locked:hover { transform:none; box-shadow:var(--shadow); border-color:transparent; }
+    .card-icon { font-size:2.6rem; flex-shrink:0; }
+    .card-info { flex:1; }
+    .card-label { font-family:'Pacifico',cursive; font-size:1.05rem; color:var(--text); margin-bottom:4px; }
+    .card-desc  { font-size:0.8rem; color:var(--text-light); line-height:1.5; }
+    .card-arrow { font-size:1.2rem; color:var(--pink-deep); opacity:0.6; }
+    .lock-badge {
+      position:absolute; top:12px; right:14px;
+      background:linear-gradient(135deg,#d4b8e0,#f4a7b9);
+      color:white; font-size:0.7rem; font-weight:700; padding:3px 10px;
+      border-radius:20px; letter-spacing:0.05em;
+    }
+
+    /* Countdown */
+    .countdown-wrap {
+      max-width:420px; width:100%; text-align:center;
+      background:rgba(255,255,255,0.7); border-radius:24px; padding:20px 24px;
+      border:1.5px solid rgba(244,167,185,0.25); backdrop-filter:blur(8px);
+    }
+    .countdown-label { font-size:0.82rem; color:var(--text-light); font-style:italic; margin-bottom:12px; }
+    .countdown-units { display:flex; gap:10px; justify-content:center; }
+    .cd-unit { text-align:center; background:white; border-radius:14px; padding:10px 14px;
+      box-shadow:0 4px 16px rgba(229,122,153,0.12); min-width:62px; }
+    .cd-num { font-family:'Pacifico',cursive; font-size:1.6rem; color:var(--pink-deep); line-height:1; }
+    .cd-lbl { font-size:0.65rem; color:var(--text-light); text-transform:uppercase; letter-spacing:0.1em; margin-top:2px; }
+
+
+    /* ══════════════════════════════
+       FLOW A — ADVENTURE
+    ══════════════════════════════ */
+
+    /* --- Step 0: Welcome popup (retro window) --- */
+    .retro-overlay {
+      display:none; position:fixed; inset:0; z-index:900;
+      background:rgba(90,62,75,0.4); backdrop-filter:blur(4px);
+      align-items:center; justify-content:center; padding:24px;
+    }
+    .retro-overlay.open { display:flex; }
+    .retro-window {
+      background:#f5f0ff; border-radius:12px; max-width:340px; width:100%;
+      box-shadow:6px 6px 0 rgba(90,62,75,0.25), 0 12px 40px rgba(90,62,75,0.15);
+      border:2px solid var(--lavender); overflow:hidden;
+      animation:retroIn 0.4s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    @keyframes retroIn {
+      from{opacity:0;transform:scale(0.8) translateY(20px);}
+      to{opacity:1;transform:scale(1) translateY(0);}
+    }
+    .retro-titlebar {
+      background:linear-gradient(90deg,var(--pink-deep),var(--lavender));
+      padding:10px 16px; display:flex; align-items:center; gap:8px;
+    }
+    .retro-dots { display:flex; gap:5px; }
+    .retro-dot {
+      width:11px;height:11px;border-radius:50%;
+    }
+    .retro-dot.r{background:#ff6b6b;} .retro-dot.y{background:#ffd93d;} .retro-dot.g{background:#6bcb77;}
+    .retro-bar-title { color:white; font-size:0.78rem; font-weight:700; letter-spacing:0.08em; margin-left:4px; }
+    .retro-body { padding:28px 24px 24px; text-align:center; }
+    .retro-icon { font-size:2.8rem; margin-bottom:12px; }
+    .retro-msg { font-family:'Nunito',sans-serif; font-size:0.98rem; color:var(--text); line-height:1.7; margin-bottom:22px; font-weight:600; }
+    .retro-btns { display:flex; flex-direction:column; gap:10px; }
+
+    /* --- Step 1: Outfit Picker --- */
+    #page-outfit {
+      background:linear-gradient(160deg,#fff0f5,#f5eeff);
+      padding:32px 20px 40px; align-items:center; gap:16px;
+    }
+    .outfit-layout { display:flex; gap:16px; max-width:440px; width:100%; align-items:flex-start; }
+    .outfit-figure-col { flex:0 0 48%; display:flex; flex-direction:column; align-items:center; gap:8px; }
+    .outfit-options-col { flex:1; display:flex; flex-direction:column; gap:10px; }
+
+    /* Stick figure */
+    .figure-wrap {
+      position:relative; width:140px; height:240px; margin:0 auto;
+    }
+    .figure-svg { width:100%; height:100%; }
+    .figure-clothing {
+      position:absolute; left:0; top:0; width:100%; height:100%;
+      pointer-events:none;
+    }
+    .outfit-slot {
+      display:flex; align-items:center; justify-content:center;
+      border-radius:12px; padding:8px;
+      background:var(--pink-light); border:2px dashed var(--pink);
+      font-size:0.75rem; color:var(--text-light); min-height:40px;
+      transition:all 0.3s ease; text-align:center; font-style:italic;
+    }
+    .outfit-slot.filled { background:white; border-style:solid; border-color:var(--pink-deep); }
+    .outfit-slot-icon { font-size:1.6rem; }
+
+    /* Outfit option cards */
+    .option-group-title { font-size:0.72rem; font-weight:700; color:var(--text-light); text-transform:uppercase; letter-spacing:0.1em; }
+    .outfit-opt {
+      background:white; border-radius:14px; padding:10px 14px;
+      border:2px solid transparent; cursor:pointer;
+      display:flex; align-items:center; gap:10px;
+      box-shadow:0 3px 14px rgba(229,122,153,0.1);
+      transition:all 0.25s ease;
+    }
+    .outfit-opt:hover:not(.disabled-opt) { border-color:var(--pink); transform:translateX(3px); }
+    .outfit-opt.selected { border-color:var(--pink-deep); background:var(--pink-light); }
+    .outfit-opt.disabled-opt { opacity:0.35; cursor:not-allowed; pointer-events:none; }
+    .outfit-opt-emoji { font-size:1.8rem; flex-shrink:0; }
+    .outfit-opt-label { font-size:0.82rem; font-weight:600; color:var(--text); }
+
+    .outfit-bottom-text { font-size:0.8rem; color:var(--text-light); text-align:center; max-width:380px; font-style:italic; line-height:1.6; }
+    .outfit-next { display:none; }
+
+    /* --- Step 2: Café Picker --- */
+    #page-cafe {
+      background:linear-gradient(160deg,#fff8f0,#fce4ec);
+      padding:32px 20px 40px; align-items:center; gap:20px;
+    }
+    .cafe-grid { display:flex; flex-direction:column; gap:14px; max-width:420px; width:100%; }
+    .cafe-card {
+      background:white; border-radius:20px; overflow:hidden;
+      border:2.5px solid transparent; cursor:pointer;
+      box-shadow:0 4px 20px rgba(229,122,153,0.12);
+      transition:all 0.3s ease;
+    }
+    .cafe-card:hover:not(.disabled-card) { border-color:var(--pink); transform:translateY(-2px); }
+    .cafe-card.selected { border-color:var(--pink-deep); }
+    .cafe-card.disabled-card { opacity:0.4; cursor:not-allowed; filter:grayscale(0.6); }
+    .cafe-thumb {
+      height:110px; background:linear-gradient(135deg,var(--pink-light),var(--lavender-light));
+      display:flex; align-items:center; justify-content:center; font-size:3rem;
+      position:relative; overflow:hidden;
+    }
+    .cafe-thumb.grey-out { filter:grayscale(1); }
+    .cafe-selected-badge {
+      display:none; position:absolute; top:10px; right:10px;
+      background:var(--pink-deep); color:white; border-radius:20px;
+      font-size:0.72rem; font-weight:700; padding:4px 10px;
+    }
+    .cafe-card.selected .cafe-selected-badge { display:block; }
+    .cafe-info { padding:12px 16px; }
+    .cafe-name { font-weight:700; font-size:0.95rem; color:var(--text); }
+    .cafe-addr { font-size:0.78rem; color:var(--text-light); margin-top:2px; }
+    .cafe-detail {
+      display:none; padding:10px 16px 14px; border-top:1px solid var(--pink-light);
+      font-size:0.8rem; color:var(--text-light); line-height:1.6;
+    }
+    .cafe-card.selected .cafe-detail { display:block; }
+    .cafe-next-wrap { max-width:420px; width:100%; }
+
+    /* --- Step 3: Restaurant Picker --- */
+    #page-restaurant {
+      background:linear-gradient(160deg,#f0e6f6,#ffe8d6);
+      padding:32px 20px 40px; align-items:center; gap:20px;
+    }
+    .dinner-scene { position:relative; height:160px; max-width:320px; width:100%; margin:0 auto; }
+    .dinner-table-svg { width:100%; height:100%; }
+
+    .cuisine-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:420px; width:100%; }
+    .cuisine-card {
+      background:white; border-radius:18px; overflow:hidden;
+      border:2.5px solid transparent; cursor:pointer;
+      box-shadow:0 4px 18px rgba(180,120,180,0.12);
+      transition:all 0.3s ease; text-align:center;
+    }
+    .cuisine-card:hover:not(.disabled-card) { border-color:var(--lavender); transform:translateY(-2px); }
+    .cuisine-card.selected { border-color:var(--pink-deep); }
+    .cuisine-card.disabled-card { opacity:0.35; cursor:not-allowed; filter:grayscale(0.7); pointer-events:none; }
+    .cuisine-thumb {
+      height:80px; background:linear-gradient(135deg,var(--lavender-light),var(--peach));
+      display:flex; align-items:center; justify-content:center; font-size:2.4rem;
+    }
+    .cuisine-label { font-size:0.8rem; font-weight:700; color:var(--text); padding:8px; }
+    .cuisine-flag { font-size:0.9rem; }
+    .restaurant-next-wrap { max-width:420px; width:100%; }
+
+    /* --- Step 4: Adventure Summary --- */
+    #page-adventure-done {
+      background:linear-gradient(160deg,#ffe4f0,#f0d6f5,#ffe8d6);
+      align-items:center; justify-content:center; padding:48px 24px; gap:20px; text-align:center;
+    }
+    .done-emoji { font-size:4rem; animation:doneBounce 1.5s ease-in-out infinite; }
+    @keyframes doneBounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
+    .summary-card {
+      background:white; border-radius:24px; padding:28px 24px;
+      max-width:380px; width:100%; box-shadow:var(--shadow);
+    }
+    .summary-title { font-family:'Pacifico',cursive; font-size:1.1rem; color:var(--pink-deep); margin-bottom:16px; }
+    .summary-item { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid var(--pink-light); font-size:0.9rem; }
+    .summary-item:last-child { border-bottom:none; }
+    .summary-icon { font-size:1.4rem; flex-shrink:0; }
+    .summary-text { color:var(--text); font-weight:600; }
+    .summary-sub  { color:var(--text-light); font-size:0.78rem; }
+
+
+    /* ══════════════════════════════
+       FLOW B — "DO YOU LOVE ME?" GATE
+    ══════════════════════════════ */
+    #page-love-gate {
+      background:linear-gradient(160deg,#ffe4f0,#f0d6f5,#ffe8d6);
+      align-items:center; justify-content:center; padding:48px 24px; gap:28px;
+    }
+    .love-gate-inner { text-align:center; display:flex; flex-direction:column; align-items:center; gap:24px; }
+    .otter-pair { font-size:5rem; letter-spacing:-8px; display:inline-flex; gap:4px; }
+    .otter-left  { display:inline-block; transition:transform 0.6s cubic-bezier(0.22,1,0.36,1); }
+    .otter-right { display:inline-block; transition:transform 0.6s cubic-bezier(0.22,1,0.36,1); }
+    .love-question { font-family:'Pacifico',cursive; font-size:clamp(1.8rem,8vw,2.8rem);
+      background:linear-gradient(135deg,var(--pink-deep),var(--lavender));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    }
+    .love-buttons { display:flex; gap:16px; align-items:center; position:relative; min-height:60px; width:100%; justify-content:center; }
+    #btn-yes-love { min-width:130px; font-size:1.05rem; }
+    #btn-no-love  {
+      min-width:100px; background:white; color:var(--text-light);
+      border:2px solid var(--pink-light); font-size:1rem;
+      position:relative; transition:all 0.15s ease;
+    }
+    .love-hint { font-size:0.8rem; color:var(--text-light); font-style:italic; min-height:20px; }
+
+
+    /* ══════════════════════════════
+       BIRTHDAY PAGE (Flow B result)
+    ══════════════════════════════ */
+    #page-birthday { display:none; flex-direction:column; }
+    #page-birthday.active { display:flex; }
+
+    /* confetti canvas */
+    #confetti-canvas {
+      position:fixed; top:0;left:0; width:100%;height:100%;
+      pointer-events:none; z-index:999;
+    }
+
+    /* Hearts bg */
+    .hearts-bg { position:fixed; top:0;left:0; width:100%;height:100%; pointer-events:none; z-index:0; overflow:hidden; }
+    .heart-float {
+      position:absolute; bottom:-50px; font-size:1.2rem;
+      animation:floatUp linear infinite; opacity:0.15;
+    }
+    @keyframes floatUp {
+      0%{transform:translateY(0) rotate(0deg);opacity:0.15;}
+      100%{transform:translateY(-110vh) rotate(20deg);opacity:0;}
+    }
+
+    /* Birthday sections */
+    .bday-section {
+      position:relative; z-index:1; padding:60px 24px;
+      min-height:100vh; display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+    }
+
+    /* Hero */
+    #bday-hero {
+      background:linear-gradient(160deg,#ffe4f0 0%,#f0d6f5 50%,#ffe8d6 100%);
+      text-align:center; gap:16px;
+    }
+    .hero-emoji { font-size:3.5rem; animation:bounce 1.5s ease-in-out infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);} }
+    .hero-subtitle { font-size:0.9rem; color:var(--text-light); letter-spacing:0.2em; text-transform:uppercase; font-weight:700; }
+    .hero-name {
+      font-family:'Pacifico',cursive; font-size:clamp(3rem,14vw,5.5rem);
+      background:linear-gradient(135deg,var(--pink-deep),var(--lavender),var(--peach));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      filter:drop-shadow(0 4px 12px rgba(229,122,153,0.25));
+      animation:nameReveal 1.2s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    @keyframes nameReveal { from{opacity:0;transform:translateY(30px) scale(0.9);}to{opacity:1;transform:translateY(0) scale(1);} }
+    .hero-date { font-family:'Nunito',sans-serif; font-size:1.1rem; color:var(--text-light); font-style:italic; }
+    .hero-tagline { font-size:0.95rem; color:var(--text); max-width:280px; line-height:1.7; margin-top:8px; }
+    .scroll-hint { margin-top:32px; display:flex; flex-direction:column; align-items:center; gap:6px; color:var(--text-light); font-size:0.8rem; }
+    .scroll-arrow { width:20px;height:20px; border-right:2px solid var(--pink-deep); border-bottom:2px solid var(--pink-deep); transform:rotate(45deg); animation:arrowBounce 1.2s ease-in-out infinite; }
+    @keyframes arrowBounce { 0%,100%{transform:rotate(45deg) translateY(0);}50%{transform:rotate(45deg) translateY(5px);} }
+
+    /* Letter */
+    #bday-letter { background:linear-gradient(160deg,#fff0f5,#f5eeff); gap:16px; }
+    .letter-card {
+      background:white; border-radius:24px; padding:36px 28px; max-width:420px; width:100%;
+      box-shadow:0 8px 40px rgba(229,122,153,0.15); position:relative;
+      border:1.5px solid rgba(244,167,185,0.3);
+    }
+    .letter-card::before { content:'💌'; position:absolute; top:-20px; left:50%; transform:translateX(-50%); font-size:2.2rem; background:white; padding:0 8px; }
+    .letter-greeting { font-family:'Pacifico',cursive; font-size:1.4rem; color:var(--pink-deep); margin-bottom:20px; }
+    .letter-body { font-family:'Nunito',sans-serif; font-size:1rem; line-height:1.9; color:var(--text); }
+    .letter-body p { margin-bottom:16px; }
+    .letter-deco { text-align:center; font-size:1.4rem; letter-spacing:8px; margin:16px 0; opacity:0.6; }
+    .letter-signature { margin-top:24px; font-family:'Pacifico',cursive; color:var(--pink-deep); font-size:1.1rem; text-align:right; }
+
+    /* Memories */
+    #bday-memories { background:linear-gradient(160deg,#fff8f0,#fce4ec); gap:16px; }
+    .memories-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; max-width:420px; width:100%; }
+    .memory-card { border-radius:18px; overflow:hidden; position:relative; aspect-ratio:1; background:var(--pink-light); box-shadow:0 4px 20px rgba(229,122,153,0.2); }
+    .memory-card.wide { grid-column:span 2; aspect-ratio:2/1; }
+    .memory-placeholder { width:100%;height:100%; display:flex;flex-direction:column;align-items:center;justify-content:center; gap:8px; background:linear-gradient(135deg,var(--pink-light),var(--lavender-light)); }
+    .photo-icon { font-size:2.5rem; opacity:0.5; }
+    .memory-caption { position:absolute; bottom:0;left:0;right:0; background:linear-gradient(transparent,rgba(90,62,75,0.7)); color:white; font-size:0.75rem; font-weight:600; padding:20px 10px 8px; text-align:center; }
+
+    /* Berlin */
+    #bday-berlin { background:linear-gradient(160deg,#f0e6f6,#ffe8d6); gap:16px; }
+    .berlin-date-badge { display:inline-block; background:linear-gradient(135deg,var(--pink-deep),var(--lavender)); color:white; font-weight:700; font-size:0.85rem; padding:6px 18px; border-radius:30px; margin-bottom:12px; }
+    .itinerary { display:flex; flex-direction:column; gap:14px; max-width:420px; width:100%; }
+    .itinerary-item { background:white; border-radius:20px; padding:16px 18px; display:flex; align-items:flex-start; gap:14px; box-shadow:0 4px 20px rgba(180,120,180,0.1); border-left:4px solid var(--pink); }
+    .itinerary-item:nth-child(2){border-left-color:var(--lavender);}
+    .itinerary-item:nth-child(3){border-left-color:var(--peach);}
+    .itinerary-item:nth-child(4){border-left-color:var(--mint);}
+    .itinerary-item:nth-child(5){border-left-color:var(--yellow);}
+    .itin-icon { font-size:1.8rem; flex-shrink:0; }
+    .itin-time { font-size:0.7rem; color:var(--text-light); font-weight:700; letter-spacing:0.1em; text-transform:uppercase; }
+    .itin-title { font-weight:700; font-size:0.95rem; color:var(--text); }
+    .itin-desc { font-size:0.82rem; color:var(--text-light); line-height:1.5; margin-top:2px; }
+
+    /* Song */
+    #bday-song { background:linear-gradient(160deg,#fce4ec,#f0e6f6); gap:16px; }
+    .player-card { background:white; border-radius:28px; padding:32px 28px; max-width:360px; width:100%; box-shadow:0 8px 40px rgba(229,122,153,0.2); text-align:center; }
+    .vinyl { width:110px;height:110px; border-radius:50%; background:radial-gradient(circle at 35% 35%,#7a5a6a,#3a2a3a); margin:0 auto 20px; display:flex;align-items:center;justify-content:center; box-shadow:0 8px 30px rgba(0,0,0,0.2); animation:spin 8s linear infinite paused; position:relative; }
+    .vinyl.playing { animation-play-state:running; }
+    @keyframes spin { from{transform:rotate(0deg);}to{transform:rotate(360deg);} }
+    .vinyl::after { content:'';width:28px;height:28px;background:var(--cream);border-radius:50%;border:4px solid var(--pink-light); }
+    .song-title-text { font-family:'Pacifico',cursive; font-size:1.2rem; color:var(--text); }
+    .song-artist { font-size:0.88rem; color:var(--text-light); margin-top:4px; margin-bottom:20px; }
+    .song-placeholder { font-size:0.82rem; color:var(--text-light); font-style:italic; background:var(--pink-light); padding:10px 16px; border-radius:12px; margin-bottom:20px; }
+    .play-btn { width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--pink-deep),var(--lavender));border:none;color:white;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(229,122,153,0.4);transition:transform 0.2s; }
+    .play-btn:active{transform:scale(0.93);}
+    .player-controls { display:flex;align-items:center;justify-content:center;gap:20px; }
+    .ctrl-btn { background:none;border:none;font-size:1.2rem;cursor:pointer;opacity:0.45;transition:opacity 0.2s; }
+    .ctrl-btn:hover{opacity:1;}
+
+    /* Closing */
+    #bday-closing { background:linear-gradient(160deg,#ffe4f0,#f0d6f5,#ffe8d6); text-align:center; gap:20px; min-height:60vh; }
+    .closing-emoji { font-size:4rem; animation:pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{transform:scale(1);}50%{transform:scale(1.1);} }
+    .closing-text { font-family:'Pacifico',cursive; font-size:clamp(1.4rem,7vw,2.2rem);
+      background:linear-gradient(135deg,var(--pink-deep),var(--lavender));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    }
+    .closing-sub { font-size:0.9rem; color:var(--text-light); font-style:italic; max-width:280px; line-height:1.7; }
+    .from-danil { font-family:'Pacifico',cursive; font-size:1.1rem; color:var(--pink-deep); }
+
+    /* Nav dots */
+    .nav-dots { position:fixed;right:14px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:100; }
+    .nav-dot { width:8px;height:8px;border-radius:50%;background:var(--pink-light);border:2px solid var(--pink);cursor:pointer;transition:all 0.3s; }
+    .nav-dot.active { background:var(--pink-deep);width:10px;height:10px;box-shadow:0 0 8px rgba(229,122,153,0.5); }
+
+    /* Reveal */
+    .reveal { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease,transform 0.7s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ═══════════════════════════
+   SCREEN SYSTEM
+═══════════════════════════ */
+.screen{display:none;position:fixed;inset:0;width:100%;height:100%;z-index:1;}
+.screen.active{display:flex;flex-direction:column;animation:screenIn 0.4s ease both;}
+@keyframes screenIn{from{opacity:0;}to{opacity:1;}}
+
+/* ═══════════════════════════
+   8-BIT INTRO SCREENS
+═══════════════════════════ */
+.intro-screen{
+  background: var(--bit-bg);
+  align-items:center; justify-content:flex-end; padding-bottom:0;
+  position:relative; overflow:hidden;
+}
+
+/* Pixel star background */
+.intro-screen::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    radial-gradient(1px 1px at 10% 15%, #fff 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 40%, #fff 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 10%, #fff 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 25%, #fff 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 55%, #fff 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 15%, #fff 0%, transparent 100%),
+    radial-gradient(1px 1px at 15% 70%, #fff 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 80%, #fff 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 70%, #fff 0%, transparent 100%),
+    radial-gradient(2px 2px at 30% 60%, rgba(255,215,64,0.6) 0%, transparent 100%),
+    radial-gradient(2px 2px at 75% 35%, rgba(64,196,255,0.6) 0%, transparent 100%);
+  opacity:0.8; pointer-events:none;
+}
+
+/* Ground */
+.pixel-ground{
+  position:absolute; bottom:0; left:0; right:0; height:80px;
+  background: repeating-linear-gradient(
+    90deg,
+    #2d4a1e 0px, #2d4a1e 16px, #3a5c28 16px, #3a5c28 32px
+  );
+  border-top:4px solid #5a8a3a;
+  image-rendering:pixelated;
+}
+.pixel-ground::before{
+  content:''; position:absolute; top:-8px; left:0; right:0; height:8px;
+  background:repeating-linear-gradient(90deg,#5a8a3a 0px,#5a8a3a 8px,#4a7a2a 8px,#4a7a2a 16px);
+}
+
+/* Scene area */
+.intro-scene{
+  position:absolute; bottom:80px; left:0; right:0;
+  display:flex; align-items:flex-end; justify-content:flex-start;
+  padding:0 24px; gap:16px;
+}
+
+/* 8-bit sprites */
+.sprite-wrap{display:flex;flex-direction:column;align-items:center;gap:0;}
+.sprite-label{font-family:'Press Start 2P',monospace;font-size:6px;color:var(--bit-gold);margin-bottom:4px;}
+
+/* Danil pixel sprite */
+.sprite-danil{
+  width:48px; height:64px;
+  image-rendering:pixelated;
+  animation:spriteWalk 0.6s steps(2) infinite;
+}
+@keyframes spriteWalk{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-3px);}
+  100%{transform:translateY(0);}
+}
+
+/* Dog pixel sprite */
+.sprite-dog{
+  width:40px; height:36px;
+  image-rendering:pixelated;
+  animation:dogWag 0.5s steps(2) infinite;
+}
+@keyframes dogWag{
+  0%{transform:translateY(0) scaleX(1);}
+  50%{transform:translateY(-2px) scaleX(1);}
+  100%{transform:translateY(0) scaleX(1);}
+}
+
+/* Dialogue box */
+.dialogue-box{
+  position:absolute; bottom:80px; left:16px; right:16px;
+  background:var(--bit-panel);
+  border:3px solid var(--bit-border);
+  box-shadow:4px 4px 0 #000, inset 0 0 0 1px rgba(124,77,255,0.3);
+  padding:16px 20px 20px; min-height:100px;
+  image-rendering:pixelated;
+}
+.dialogue-box::before{
+  content:''; position:absolute; top:-3px;left:-3px;right:-3px;bottom:-3px;
+  border:1px solid rgba(124,77,255,0.4); pointer-events:none;
+}
+.dialogue-name{
+  font-family:'Press Start 2P',monospace; font-size:7px;
+  color:var(--bit-gold); margin-bottom:8px; letter-spacing:0.05em;
+}
+.dialogue-text{
+  font-family:'Press Start 2P',monospace; font-size:8px;
+  color:var(--bit-text); line-height:1.8; min-height:48px;
+  word-break:break-word;
+}
+.dialogue-cursor{
+  display:inline-block; width:8px; height:10px;
+  background:var(--bit-text); margin-left:2px;
+  animation:blink 0.7s step-end infinite; vertical-align:middle;
+}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+.next-btn{
+  position:absolute; bottom:90px; right:20px;
+  font-family:'Press Start 2P',monospace; font-size:8px;
+  background:var(--bit-border); color:white; border:2px solid #b39ddb;
+  padding:8px 14px; cursor:pointer;
+  box-shadow:3px 3px 0 #000;
+  animation:btnPulse 1s ease-in-out infinite;
+  display:none;
+}
+@keyframes btnPulse{0%,100%{transform:translateY(0);}50%{transform:translateY(-2px);}}
+.next-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #000;}
+.start-btn{
+  position:absolute; bottom:90px; right:20px;
+  font-family:'Press Start 2P',monospace; font-size:8px;
+  background:var(--bit-gold); color:#1a0a2e; border:2px solid #fff;
+  padding:10px 18px; cursor:pointer;
+  box-shadow:3px 3px 0 #000; display:none;
+  animation:btnPulse 0.8s ease-in-out infinite;
+}
+
+
+/* ═══════════════════════════
+   QUIZ SCREEN
+═══════════════════════════ */
+#screen-quiz{
+  background:var(--bit-bg);
+  align-items:center; justify-content:flex-start;
+  padding:16px; gap:12px; overflow:hidden;
+}
+#screen-quiz::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    radial-gradient(1px 1px at 10% 15%, #fff 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 10%, #fff 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 25%, #fff 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 65%, #fff 0%, transparent 100%),
+    radial-gradient(2px 2px at 30% 80%, rgba(255,215,64,0.4) 0%, transparent 100%);
+  opacity:0.6; pointer-events:none;
+}
+
+/* Hearts bar */
+.hearts-bar{
+  width:100%; max-width:480px;
+  display:flex; align-items:center; justify-content:space-between;
+  position:relative; z-index:2;
+}
+.hearts-left{display:flex;gap:6px;}
+.heart-icon{font-size:1.4rem;transition:all 0.3s;}
+.heart-icon.lost{filter:grayscale(1);opacity:0.3;transform:scale(0.8);}
+.quiz-progress{
+  font-family:'Press Start 2P',monospace; font-size:7px; color:var(--bit-gold);
+}
+
+/* Question panel */
+.question-panel{
+  width:100%; max-width:480px;
+  background:var(--bit-panel); border:3px solid var(--bit-blue);
+  box-shadow:4px 4px 0 #000; padding:16px 18px;
+  position:relative; z-index:2;
+}
+.question-num{
+  font-family:'Press Start 2P',monospace; font-size:7px;
+  color:var(--bit-blue); margin-bottom:8px;
+}
+.question-text{
+  font-family:'Press Start 2P',monospace; font-size:8px;
+  color:var(--bit-text); line-height:1.9; word-break:break-word;
+}
+
+/* Answer grid */
+.answers-grid{
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:10px; width:100%; max-width:480px;
+  position:relative; z-index:2;
+}
+.answer-btn{
+  font-family:'Press Start 2P',monospace; font-size:7px;
+  background:var(--bit-panel); color:var(--bit-text);
+  border:2px solid var(--bit-border);
+  box-shadow:3px 3px 0 #000; padding:12px 10px;
+  cursor:pointer; line-height:1.6; text-align:left;
+  transition:background 0.15s, border-color 0.15s;
+  position:relative; overflow:hidden;
+}
+.answer-btn:hover:not(:disabled){background:#3d2b4d;border-color:var(--bit-gold);}
+.answer-btn:active:not(:disabled){transform:translate(2px,2px);box-shadow:1px 1px 0 #000;}
+.answer-btn .opt-label{color:var(--bit-gold);display:block;margin-bottom:5px;font-size:6px;}
+.answer-btn.correct{background:#1b5e20;border-color:var(--bit-green);color:var(--bit-green);}
+.answer-btn.wrong{background:#b71c1c;border-color:var(--bit-red);color:var(--bit-red);animation:shake 0.4s ease;}
+.answer-btn.disabled-opt{opacity:0.35;cursor:not-allowed;pointer-events:none;}
+@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}}
+
+/* Feedback flash */
+.quiz-feedback{
+  font-family:'Press Start 2P',monospace; font-size:9px;
+  text-align:center; min-height:20px; position:relative; z-index:2;
+}
+
+/* ═══════════════════════════
+   INTERLUDE SCREEN (between Q2 & Q3)
+═══════════════════════════ */
+#screen-interlude{ background:var(--bit-bg); }
+#screen-interlude::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(1px 1px at 20% 20%,#fff 0%,transparent 100%),radial-gradient(1px 1px at 70% 60%,#fff 0%,transparent 100%);
+  opacity:0.6;pointer-events:none;
+}
+
+/* ═══════════════════════════
+   GAME OVER
+═══════════════════════════ */
+#screen-gameover{
+  background:var(--bit-bg); align-items:center; justify-content:center; gap:20px;
+}
+.gameover-title{
+  font-family:'Press Start 2P',monospace; font-size:clamp(16px,5vw,28px);
+  color:var(--bit-red); text-align:center;
+  text-shadow:3px 3px 0 #7b0000; animation:flickerRed 1s ease-in-out infinite;
+}
+@keyframes flickerRed{0%,100%{opacity:1;}50%{opacity:0.7;}}
+.gameover-sub{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--bit-text);text-align:center;line-height:1.9;}
+.restart-btn{
+  font-family:'Press Start 2P',monospace;font-size:9px;
+  background:var(--bit-green);color:#000;border:2px solid #fff;
+  padding:12px 20px;cursor:pointer;box-shadow:4px 4px 0 #000;
+  animation:btnPulse 0.8s ease-in-out infinite;
+}
+
+/* ═══════════════════════════
+   WIN / CONGRATS SCREEN
+═══════════════════════════ */
+#screen-win{ background:var(--bit-bg); }
+#screen-win::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at center, rgba(124,77,255,0.15) 0%, transparent 70%);
+  pointer-events:none;
+}
+
+/* ═══════════════════════════
+   GIFT PAGE
+═══════════════════════════ */
+#screen-gift{
+  background:linear-gradient(160deg,#ffe4f0,#f0d6f5,#ffe8d6);
+  align-items:center; justify-content:center;
+  overflow:hidden; position:relative;
+}
+.gift-bg-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(160deg,rgba(255,228,240,0.9),rgba(240,214,245,0.85),rgba(255,232,214,0.9));
+  z-index:0;
+}
+.gift-content{
+  position:relative;z-index:2;display:flex;flex-direction:column;
+  align-items:center;gap:16px;text-align:center;padding:24px;
+  width:100%;
+}
+.gift-bday-text{
+  font-family:'Pacifico',cursive;font-size:clamp(1.8rem,7vw,3rem);
+  background:linear-gradient(135deg,#e57a99,#d4b8e0);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.gift-illustration{
+  font-size:4rem;animation:giftBounce 1.5s ease-in-out infinite;
+}
+@keyframes giftBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.gift-photo-frame{
+  width:120px;height:120px;border-radius:50%;
+  background:linear-gradient(135deg,var(--pink-light),var(--lavender-light));
+  border:4px solid #e57a99;display:flex;align-items:center;justify-content:center;
+  font-size:3rem;box-shadow:0 8px 30px rgba(229,122,153,0.3);
+  overflow:hidden;
+}
+.envelope-wrap{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  animation:envelopeReveal 1s cubic-bezier(0.22,1,0.36,1) both;
+  cursor:pointer;
+}
+@keyframes envelopeReveal{
+  from{opacity:0;transform:scale(0.2);}
+  to{opacity:1;transform:scale(1);}
+}
+.envelope-icon{font-size:4rem;animation:envelopeFloat 2s ease-in-out infinite;}
+@keyframes envelopeFloat{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-8px) rotate(3deg);}}
+.envelope-label{
+  font-family:'Quicksand',sans-serif;font-weight:700;font-size:0.85rem;
+  color:#5a3e4b;background:rgba(255,255,255,0.8);
+  padding:8px 16px;border-radius:20px;border:1.5px solid rgba(229,122,153,0.3);
+}
+
+/* ═══════════════════════════
+   LETTER PAGE
+═══════════════════════════ */
+#screen-letter{
+  background:linear-gradient(160deg,#fff0f5,#f5eeff);
+  overflow-y:auto;
+}
+.letter-wrap{
+  display:flex;flex-direction:column;align-items:center;
+  padding:32px 20px 100px;gap:0;min-height:100%;
+}
+.envelope-open-anim{
+  font-size:3rem;text-align:center;margin-bottom:16px;
+  animation:envelopeOpen 0.8s ease both;
+}
+@keyframes envelopeOpen{from{transform:scaleY(0);}to{transform:scaleY(1);}}
+.letter-paper{
+  background:white;border-radius:20px;padding:32px 26px;max-width:420px;width:100%;
+  box-shadow:0 8px 40px rgba(229,122,153,0.18);
+  border:1.5px solid rgba(244,167,185,0.3);
+  animation:letterSlide 0.8s cubic-bezier(0.22,1,0.36,1) 0.4s both;
+}
+@keyframes letterSlide{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+.letter-greeting{font-family:'Pacifico',cursive;font-size:1.4rem;color:#e57a99;margin-bottom:20px;}
+.letter-body{font-family:'Nunito',sans-serif;font-size:1rem;line-height:1.9;color:#5a3e4b;}
+.letter-body p{margin-bottom:14px;}
+.letter-deco{text-align:center;font-size:1.3rem;letter-spacing:8px;margin:12px 0;opacity:0.6;}
+.letter-sig{margin-top:20px;font-family:'Pacifico',cursive;color:#e57a99;font-size:1.1rem;text-align:right;}
+.letter-next-btn{
+  position:fixed;bottom:24px;right:20px;
+  background:linear-gradient(135deg,#e57a99,#d4b8e0);color:white;
+  border:none;border-radius:50px;padding:12px 22px;
+  font-family:'Quicksand',sans-serif;font-weight:700;font-size:0.9rem;
+  cursor:pointer;box-shadow:0 6px 20px rgba(229,122,153,0.35);
+  display:flex;align-items:center;gap:6px;
+}
+
+/* Letter confirm modal */
+.letter-modal-overlay{
+  display:none;position:fixed;inset:0;z-index:200;
+  background:rgba(90,62,75,0.4);backdrop-filter:blur(4px);
+  align-items:center;justify-content:center;padding:24px;
+}
+.letter-modal-overlay.open{display:flex;}
+.letter-modal-box{
+  background:white;border-radius:24px;padding:30px 26px;max-width:320px;width:100%;
+  text-align:center;box-shadow:0 20px 60px rgba(90,62,75,0.2);
+  animation:modalIn 0.3s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes modalIn{from{opacity:0;transform:scale(0.85);}to{opacity:1;transform:scale(1);}}
+.letter-modal-emoji{font-size:2rem;margin-bottom:10px;}
+.letter-modal-title{font-family:'Pacifico',cursive;font-size:1.2rem;color:#e57a99;margin-bottom:8px;}
+.letter-modal-sub{font-size:0.85rem;color:#9c7a88;margin-bottom:20px;line-height:1.6;}
+.letter-modal-btns{display:flex;flex-direction:column;gap:10px;}
+.lm-btn{
+  padding:12px;border-radius:50px;border:none;cursor:pointer;
+  font-family:'Quicksand',sans-serif;font-weight:700;font-size:0.9rem;
+}
+.lm-btn-yes{background:linear-gradient(135deg,#e57a99,#d4b8e0);color:white;}
+.lm-btn-no{background:#fce4ec;color:#e57a99;}
+
+/* ═══════════════════════════
+   COLLAGE PAGE
+═══════════════════════════ */
+#screen-collage{
+  background:#1a0a2e;overflow:hidden;position:relative;
+  align-items:center;justify-content:center;
+}
+.collage-bg{position:absolute;inset:0;z-index:0;overflow:hidden;}
+.collage-photo{
+  position:absolute;border-radius:12px;overflow:hidden;
+  border:3px solid white;box-shadow:0 4px 20px rgba(0,0,0,0.4);
+  opacity:0;
+}
+.collage-photo.arrived{opacity:1;}
+.collage-center-msg{
+  position:relative;z-index:10;
+  font-family:'Pacifico',cursive;font-size:clamp(1.4rem,6vw,2.2rem);
+  color:white;text-align:center;padding:16px 24px;
+  background:rgba(26,10,46,0.6);border-radius:16px;
+  backdrop-filter:blur(8px);
+  border:1.5px solid rgba(255,255,255,0.15);
+  transition:all 0.8s ease;
+  text-shadow:0 2px 12px rgba(0,0,0,0.5);
+}
+
+/* ═══════════════════════════
+   OUR PHOTOS PAGE
+═══════════════════════════ */
+#screen-ourphotos{
+  background:#1a0a2e;overflow:hidden;position:relative;
+  align-items:center;justify-content:center;
+}
+.ourphotos-bg{
+  position:absolute;inset:0;z-index:0;
+  display:grid;grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr;
+}
+.ourphoto-slot{
+  background:linear-gradient(135deg,#2d1b33,#1a0a2e);
+  display:flex;align-items:center;justify-content:center;
+  font-size:3rem;opacity:0.4;overflow:hidden;
+}
+.ourphotos-msg{
+  position:relative;z-index:10;
+  font-family:'Pacifico',cursive;font-size:clamp(1.2rem,5vw,1.8rem);
+  color:white;text-align:center;padding:20px 28px;
+  background:rgba(0,0,0,0.55);border-radius:20px;
+  backdrop-filter:blur(10px);border:1.5px solid rgba(255,255,255,0.12);
+  max-width:360px;line-height:1.5;
+  text-shadow:0 2px 12px rgba(0,0,0,0.6);
+  animation:msgFadeIn 1.5s ease both;
+}
+@keyframes msgFadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* ═══════════════════════════
+   CREDITS PAGE
+═══════════════════════════ */
+#screen-credits{
+  background:#1a0a2e;overflow:hidden;position:relative;
+}
+.credits-bg{
+  position:absolute;inset:0;z-index:0;
+  display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;
+}
+.credit-photo-slot{
+  background:linear-gradient(135deg,#2d1b33,#1a0a2e);
+  display:flex;align-items:center;justify-content:center;font-size:3rem;
+  opacity:0.35;overflow:hidden;
+}
+.credits-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to bottom,rgba(26,10,46,0.4),rgba(26,10,46,0.7));
+}
+.credits-scroll{
+  position:absolute;z-index:2;width:100%;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:24px;
+  padding:0 32px;
+  animation:creditsRoll linear both;
+}
+@keyframes creditsRoll{
+  from{transform:translateY(100vh);}
+  to{transform:translateY(-100%);}
+}
+.credits-title{
+  font-family:'Pacifico',cursive;font-size:1.8rem;
+  color:var(--bit-gold);text-shadow:0 0 20px rgba(255,215,64,0.5);
+  margin-bottom:8px;
+}
+.credits-role{font-family:'Press Start 2P',monospace;font-size:7px;color:rgba(255,255,255,0.5);letter-spacing:0.15em;margin-bottom:4px;}
+.credits-name{font-family:'Pacifico',cursive;font-size:1.4rem;color:white;}
+.credits-divider{width:60px;height:2px;background:rgba(255,255,255,0.2);margin:8px auto;}
+.credits-special{
+  font-family:'Pacifico',cursive;font-size:1.6rem;
+  color:#f4a7b9;text-shadow:0 0 20px rgba(244,167,185,0.5);
+}
+.credits-date{font-family:'Press Start 2P',monospace;font-size:9px;color:rgba(255,255,255,0.6);margin-top:8px;}
+.credits-heart{font-size:2.5rem;animation:creditsHeart 1.5s ease-in-out infinite;}
+@keyframes creditsHeart{0%,100%{transform:scale(1);}50%{transform:scale(1.2);}}
+
+/* ═══════════════════════════
+   AUDIO
+═══════════════════════════ */
+#bg-audio{display:none;}
+
+  </style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<!-- YouTube hidden music player -->
+<div id="yt-player-wrap" style="position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;overflow:hidden;z-index:-1;">
+  <div id="yt-player"></div>
+</div>
+<script src="https://www.youtube.com/iframe_api"></script>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 1 — PASSWORD
+══════════════════════════════════════════════════════ -->
+<div class="page active" id="page-password">
+  <div style="position:fixed;inset:0;background:url('images/password_page_background.jpg') center/cover no-repeat;pointer-events:none;z-index:-1;"></div>
+  <div style="position:fixed;inset:0;background:rgba(255,228,240,0.45);pointer-events:none;z-index:-1;"></div>
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;">
+    <div class="pw-card">
+      <span class="floating-deco" style="top:-10px;left:20px;animation-delay:0s;">🌸</span>
+      <span class="floating-deco" style="top:-10px;right:20px;animation-delay:1.5s;">✨</span>
+      <span class="floating-deco" style="bottom:10px;left:15px;animation-delay:0.8s;">💕</span>
+      <div class="pw-lock">🔐</div>
+      <h1 class="pw-title">Enter the Password</h1>
+      <p class="pw-sub">Something special is waiting for you inside...</p>
+      <div class="pw-input-wrap">
+        <input class="pw-input" id="pw-input" type="password" placeholder="••••••••"
+               maxlength="20" autocomplete="off" inputmode="numeric"/>
+      </div>
+      <p class="pw-hint">💡 Hint: our anniversary date</p>
+      <p class="pw-error" id="pw-error"></p>
+      <button class="btn btn-primary pw-btn" onclick="checkPassword()">Open ✨</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 2 — HOMEPAGE
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-home">
+  <div style="display:flex;flex-direction:column;align-items:center;padding:48px 24px 40px;gap:22px;min-height:100vh;background:url('images/homepage_background.jpg') center/cover no-repeat fixed;">
+    <p class="home-greeting">🌸 Hello, Khaerine 🌸</p>
+    <h1 class="home-title">What would you<br>like to explore?</h1>
+
+    <div class="home-cards">
+      <!-- Card A: Adventure -->
+      <div class="home-card" onclick="startAdventure()">
+        <div class="card-icon">🗺️</div>
+        <div class="card-info">
+          <div class="card-label">Our Birthday Adventure</div>
+          <div class="card-desc">Plan our special day together — outfit, café, dinner & more ✨</div>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
+
+      <!-- Card B: Birthday world (locked until May 3) -->
+      <div class="home-card locked" id="birthday-card" onclick="tryOpenBirthday()">
+        <div class="card-icon">🎂</div>
+        <div class="card-info">
+          <div class="card-label">A Little World For You</div>
+          <div class="card-desc" id="birthday-card-desc">Flowers, music, memories & a birthday wish just for you 💌</div>
+        </div>
+        <div class="card-arrow">→</div>
+        <div class="lock-badge" id="birthday-lock-badge">🔒 Available on 3 Mai</div>
+      </div>
+    </div>
+
+    <!-- Countdown -->
+    <div class="countdown-wrap">
+      <p class="countdown-label">✨ Your birthday is just around the corner...</p>
+      <div class="countdown-units">
+        <div class="cd-unit"><div class="cd-num" id="cd-days">--</div><div class="cd-lbl">Days</div></div>
+        <div class="cd-unit"><div class="cd-num" id="cd-hours">--</div><div class="cd-lbl">Hours</div></div>
+        <div class="cd-unit"><div class="cd-num" id="cd-mins">--</div><div class="cd-lbl">Mins</div></div>
+        <div class="cd-unit"><div class="cd-num" id="cd-secs">--</div><div class="cd-lbl">Secs</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     RETRO WELCOME POPUP
+══════════════════════════════════════════════════════ -->
+<div class="retro-overlay" id="retro-welcome">
+  <div class="retro-window">
+    <div class="retro-titlebar">
+      <div class="retro-dots">
+        <div class="retro-dot r"></div>
+        <div class="retro-dot y"></div>
+        <div class="retro-dot g"></div>
+      </div>
+      <span class="retro-bar-title">BIRTHDAY_ADVENTURE.exe</span>
+    </div>
+    <div class="retro-body">
+      <div class="retro-icon">🎉</div>
+      <p class="retro-msg">Are you ready to spend a whole day on your birthday with me? 🥹</p>
+      <div class="retro-btns">
+        <button class="btn btn-primary" onclick="closeRetroAndGo()">More than ready!! 🥹</button>
+        <button class="btn btn-ghost" onclick="closeRetroAndGo()">Ready! ✨</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     FLOW A · STEP 1 — OUTFIT PICKER
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-outfit" style="background:url('images/dressage_background.jpg') center/cover no-repeat fixed;">
+  <div style="position:fixed;inset:0;background:rgba(255,240,245,0.75);pointer-events:none;z-index:0;"></div>
+  <div style="text-align:center;position:relative;z-index:1;">
+    <h2 class="sec-title">What should I wear? 👗</h2>
+    <p class="sec-sub">Dress me up for our special day! 💕</p>
+  </div>
+
+  <div class="outfit-layout" style="position:relative;z-index:1;">
+    <!-- Left: figure -->
+    <div class="outfit-figure-col">
+      <div class="figure-wrap">
+        <svg class="figure-svg" viewBox="0 0 140 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Head with real face photo -->
+          <clipPath id="face-clip"><circle cx="70" cy="36" r="22"/></clipPath>
+          <!-- No-smile face (default) -->
+          <image id="face-neutral-img" href="images/no_smiling_face.jpg"
+            x="48" y="14" width="44" height="44"
+            clip-path="url(#face-clip)" preserveAspectRatio="xMidYMid slice"/>
+          <!-- Smile face (shown when outfit complete) -->
+          <image id="face-smile-img" href="images/smiling_face.jpg"
+            x="48" y="14" width="44" height="44"
+            clip-path="url(#face-clip)" preserveAspectRatio="xMidYMid slice"
+            style="display:none"/>
+          <!-- Head border -->
+          <circle cx="70" cy="36" r="22" fill="none" stroke="#f4a7b9" stroke-width="2"/>
+          <!-- Neck -->
+          <rect x="66" y="57" width="8" height="12" rx="4" fill="#fce4ec"/>
+          <!-- Torso -->
+          <rect x="50" y="68" width="40" height="52" rx="10" fill="#f0e6f6" id="torso-bg"/>
+          <!-- Arms -->
+          <line x1="50" y1="78" x2="28" y2="105" stroke="#fce4ec" stroke-width="10" stroke-linecap="round"/>
+          <line x1="90" y1="78" x2="112" y2="105" stroke="#fce4ec" stroke-width="10" stroke-linecap="round"/>
+          <!-- Legs -->
+          <rect x="55" y="118" width="30" height="60" rx="8" fill="#e8d5f0" id="pants-bg"/>
+          <!-- Feet -->
+          <ellipse cx="62" cy="182" rx="10" ry="6" fill="#fce4ec"/>
+          <ellipse cx="78" cy="182" rx="10" ry="6" fill="#fce4ec"/>
+        </svg>
+      </div>
+
+      <!-- Selected outfit display -->
+      <div style="width:100%;display:flex;flex-direction:column;gap:6px;">
+        <div class="outfit-slot" id="shirt-slot"><span style="font-size:0.7rem;">👕 no shirt yet</span></div>
+        <div class="outfit-slot" id="pants-slot"><span style="font-size:0.7rem;">👖 no pants yet</span></div>
+      </div>
+    </div>
+
+    <!-- Right: options -->
+    <div class="outfit-options-col">
+      <div class="option-group-title">👕 Shirts</div>
+      <div class="outfit-opt" data-type="shirt" data-idx="0" data-color="#c8e6c9" data-label="Shirt 1" onclick="selectOutfit(this)">
+        <img src="images/shirts_1.jpg" style="width:40px;height:40px;object-fit:cover;border-radius:8px;flex-shrink:0;" onerror="this.style.display='none';this.nextSibling.textContent='👕'"/>
+        <span class="outfit-opt-label">Shirt 1<br><span style="font-size:0.72rem;color:var(--text-light)">Option A</span></span>
+      </div>
+      <div class="outfit-opt" data-type="shirt" data-idx="1" data-color="#bbdefb" data-label="Shirt 2" onclick="selectOutfit(this)">
+        <img src="images/shirts_2.jpg" style="width:40px;height:40px;object-fit:cover;border-radius:8px;flex-shrink:0;" onerror="this.style.display='none';this.nextSibling.textContent='👔'"/>
+        <span class="outfit-opt-label">Shirt 2<br><span style="font-size:0.72rem;color:var(--text-light)">Option B</span></span>
+      </div>
+      <div class="outfit-opt" data-type="shirt" data-idx="2" data-color="#ffe0b2" data-label="Shirt 3" onclick="selectOutfit(this)">
+        <img src="images/shirts_3.jpg" style="width:40px;height:40px;object-fit:cover;border-radius:8px;flex-shrink:0;" onerror="this.style.display='none';this.nextSibling.textContent='🧡'"/>
+        <span class="outfit-opt-label">Shirt 3<br><span style="font-size:0.72rem;color:var(--text-light)">Option C</span></span>
+      </div>
+
+      <div class="option-group-title" style="margin-top:4px;">👖 Pants</div>
+      <div class="outfit-opt" data-type="pants" data-idx="0" data-color="#90a4ae" data-label="Pants 1" onclick="selectOutfit(this)">
+        <img src="images/pants_1.jpg" style="width:40px;height:40px;object-fit:cover;border-radius:8px;flex-shrink:0;" onerror="this.style.display='none';this.nextSibling.textContent='👖'"/>
+        <span class="outfit-opt-label">Pants 1<br><span style="font-size:0.72rem;color:var(--text-light)">Option A</span></span>
+      </div>
+      <div class="outfit-opt" data-type="pants" data-idx="1" data-color="#a5d6a7" data-label="Pants 2" onclick="selectOutfit(this)">
+        <img src="images/pants_2.jpg" style="width:40px;height:40px;object-fit:cover;border-radius:8px;flex-shrink:0;" onerror="this.style.display='none';this.nextSibling.textContent='🩳'"/>
+        <span class="outfit-opt-label">Pants 2<br><span style="font-size:0.72rem;color:var(--text-light)">Option B</span></span>
+      </div>
+      <div class="outfit-opt" data-type="pants" data-idx="2" data-color="#ce93d8" data-label="Pants 3" onclick="selectOutfit(this)">
+        <img src="images/pants_3.jpg" style="width:40px;height:40px;object-fit:cover;border-radius:8px;flex-shrink:0;" onerror="this.style.display='none';this.nextSibling.textContent='🎽'"/>
+        <span class="outfit-opt-label">Pants 3<br><span style="font-size:0.72rem;color:var(--text-light)">Option C</span></span>
+      </div>
+    </div>
+  </div>
+
+  <p class="outfit-bottom-text" style="position:relative;z-index:1;">
+    Not feeling any of these? Just tell me and I'll wear whatever you choose! 😄
+  </p>
+
+  <button class="btn btn-primary outfit-next" id="outfit-next-btn" onclick="goTo('page-cafe')" style="position:relative;z-index:1;">
+    Next →
+  </button>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     FLOW A · STEP 2 — CAFÉ PICKER
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-cafe" style="background:url('images/cafes_page_background.jpg') center/cover no-repeat fixed;">
+  <div style="position:fixed;inset:0;background:rgba(255,248,240,0.75);pointer-events:none;z-index:0;"></div>
+  <div style="text-align:center;position:relative;z-index:1;">
+    <h2 class="sec-title">Where shall we start<br>our morning? ☕</h2>
+    <p class="sec-sub">Pick our first stop together 🌸</p>
+  </div>
+
+  <div class="cafe-grid" style="position:relative;z-index:1;">
+    <!-- Café A -->
+    <div class="cafe-card" id="cafe-0" onclick="selectCafe(0)">
+      <div class="cafe-thumb" id="cafe-thumb-0" style="padding:0;overflow:hidden;">
+        <img src="images/cafes_1.jpg" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentNode.innerHTML='☕'"/>
+      </div>
+      <div class="cafe-selected-badge">✓ Selected</div>
+      <div class="cafe-info">
+        <div class="cafe-name">Herman Schulz Café-Bar</div>
+        <div class="cafe-addr">📍 Finowstraße 33, 10247 Berlin</div>
+      </div>
+      <div class="cafe-detail">☕ Super cozy grandma-living-room vibes, great coffee, cash only — open from 10AM 🌿</div>
+    </div>
+    <!-- Café B -->
+    <div class="cafe-card" id="cafe-1" onclick="selectCafe(1)">
+      <div class="cafe-thumb" id="cafe-thumb-1" style="padding:0;overflow:hidden;">
+        <img src="images/cafes_2.jpg" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentNode.innerHTML='🌸'"/>
+      </div>
+      <div class="cafe-selected-badge">✓ Selected</div>
+      <div class="cafe-info">
+        <div class="cafe-name">An einem Sonntag im August</div>
+        <div class="cafe-addr">📍 Kastanienallee 103, 10435 Berlin</div>
+      </div>
+      <div class="cafe-detail">🌿 Cozy ruin-bar vibes, warm drinks, lively neighbourhood — open from 4PM 🌸</div>
+    </div>
+    <!-- Café C -->
+    <div class="cafe-card" id="cafe-2" onclick="selectCafe(2)">
+      <div class="cafe-thumb" id="cafe-thumb-2" style="padding:0;overflow:hidden;">
+        <img src="images/cafes_3.jpg" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentNode.innerHTML='🎨'"/>
+      </div>
+      <div class="cafe-selected-badge">✓ Selected</div>
+      <div class="cafe-info">
+        <div class="cafe-name">Leuchtstoff — Kaffeebar & Bakery</div>
+        <div class="cafe-addr">📍 Siegfriedstraße 18, 12051 Berlin (Neukölln)</div>
+      </div>
+      <div class="cafe-detail">🥐 Specialty coffee, fresh baked goods, radical chic neighbourhood spot — open from 7:30AM 🪴</div>
+    </div>
+  </div>
+
+  <div class="cafe-next-wrap" style="position:relative;z-index:1;">
+    <button class="btn btn-primary disabled" id="cafe-next-btn" onclick="cafeNext()" style="width:100%;" disabled>
+      Next →
+    </button>
+  </div>
+</div>
+
+<!-- Café confirmation modal -->
+<div class="modal-overlay" id="modal-cafe">
+  <div class="modal-box">
+    <div class="modal-emoji">☕</div>
+    <div class="modal-title">This is where our morning begins...</div>
+    <div class="modal-sub" id="modal-cafe-text">Are you sure this is the place? 🌸</div>
+    <div class="modal-btns">
+      <button class="btn btn-primary" onclick="confirmCafe(true)">Yes, let's go! 💕</button>
+      <button class="btn btn-ghost" onclick="confirmCafe(false)">Hmm, let me think...</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     FLOW A · STEP 3 — RESTAURANT PICKER
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-restaurant" style="background:url('images/restaurant_page_background.jpg') center/cover no-repeat fixed;">
+  <div style="position:fixed;inset:0;background:rgba(240,230,246,0.75);pointer-events:none;z-index:0;"></div>
+  <div style="text-align:center;position:relative;z-index:1;">
+    <h2 class="sec-title">What shall we taste<br>on your birthday? 🍽️</h2>
+    <p class="sec-sub">Pick our dinner cuisine 🥂</p>
+  </div>
+
+  <!-- Dinner scene SVG with real face photos -->
+  <div class="dinner-scene" style="position:relative;z-index:1;">
+    <svg viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+      <!-- Table -->
+      <rect x="110" y="80" width="100" height="16" rx="8" fill="#d4b8e0"/>
+      <rect x="125" y="96" width="10" height="40" rx="5" fill="#c5a8d4"/>
+      <rect x="185" y="96" width="10" height="40" rx="5" fill="#c5a8d4"/>
+      <rect x="112" y="82" width="96" height="12" rx="6" fill="#e8d5f5" opacity="0.6"/>
+      <!-- Candle -->
+      <rect x="157" y="60" width="6" height="22" rx="3" fill="#fff9c4"/>
+      <ellipse cx="160" cy="58" rx="4" ry="6" fill="#ffcc02" opacity="0.8"/>
+      <!-- Dishes on table -->
+      <g id="dishes-on-table" style="display:none">
+        <circle cx="138" cy="78" r="12" fill="#fff8f0" stroke="#f4a7b9" stroke-width="1.5"/>
+        <circle cx="182" cy="78" r="12" fill="#fff8f0" stroke="#f4a7b9" stroke-width="1.5"/>
+        <text id="dish-left"  x="138" y="83" text-anchor="middle" font-size="14">🍜</text>
+        <text id="dish-right" x="182" y="83" text-anchor="middle" font-size="14">🍜</text>
+      </g>
+      <!-- Left person (Danil) — real face -->
+      <clipPath id="danil-clip"><circle cx="60" cy="55" r="20"/></clipPath>
+      <image href="images/danil_face.jpg" x="40" y="35" width="40" height="40"
+        clip-path="url(#danil-clip)" preserveAspectRatio="xMidYMid slice"/>
+      <circle cx="60" cy="55" r="20" fill="none" stroke="#f4a7b9" stroke-width="1.5"/>
+      <rect x="44" y="74" width="32" height="36" rx="8" fill="#d4b8e0"/>
+      <line x1="44" y1="82" x2="26" y2="100" stroke="#fce4ec" stroke-width="8" stroke-linecap="round"/>
+      <line x1="76" y1="82" x2="94" y2="100" stroke="#fce4ec" stroke-width="8" stroke-linecap="round"/>
+      <text x="60" y="120" text-anchor="middle" style="font-family:Quicksand;font-size:9px;font-weight:700;fill:#9c7a88;">Danil</text>
+      <!-- Right person (Khaerine) — real face -->
+      <clipPath id="khaerine-clip"><circle cx="260" cy="55" r="20"/></clipPath>
+      <image href="images/khaerine_face.jpg" x="240" y="35" width="40" height="40"
+        clip-path="url(#khaerine-clip)" preserveAspectRatio="xMidYMid slice"/>
+      <circle cx="260" cy="55" r="20" fill="none" stroke="#f4a7b9" stroke-width="1.5"/>
+      <rect x="244" y="74" width="32" height="36" rx="8" fill="#f4a7b9"/>
+      <line x1="244" y1="82" x2="226" y2="100" stroke="#fce4ec" stroke-width="8" stroke-linecap="round"/>
+      <line x1="276" y1="82" x2="294" y2="100" stroke="#fce4ec" stroke-width="8" stroke-linecap="round"/>
+      <text x="260" y="120" text-anchor="middle" style="font-family:Quicksand;font-size:9px;font-weight:700;fill:#9c7a88;">Khaerine</text>
+    </svg>
+  </div>
+
+  <div class="cuisine-grid" style="position:relative;z-index:1;grid-template-columns:1fr 1fr 1fr;">
+    <!-- Lon Men's Noodle House — Taiwanese -->
+    <div class="cuisine-card" id="cuisine-tw" onclick="selectCuisine(this,'Lon Men\'s Noodle House 🇹🇼','🥟')">
+      <div class="cuisine-thumb" style="padding:0;overflow:hidden;">
+        <img src="images/foods_1.jpg" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentNode.innerHTML='🥟'"/>
+      </div>
+      <div class="cuisine-label"><span class="cuisine-flag">🇹🇼</span><br>Lon Men's</div>
+      <div style="font-size:0.65rem;color:var(--text-light);padding:0 8px 8px;text-align:center;">Kantstraße 33, 10625 Berlin</div>
+    </div>
+    <!-- Nusantara — Indonesian -->
+    <div class="cuisine-card" id="cuisine-id" onclick="selectCuisine(this,'Nusantara 🇮🇩','🍛')">
+      <div class="cuisine-thumb" style="padding:0;overflow:hidden;">
+        <img src="images/foods_2.jpg" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentNode.innerHTML='🍛'"/>
+      </div>
+      <div class="cuisine-label"><span class="cuisine-flag">🇮🇩</span><br>Nusantara</div>
+      <div style="font-size:0.65rem;color:var(--text-light);padding:0 8px 8px;text-align:center;">Turmstr. 18, 10559 Berlin</div>
+    </div>
+    <!-- Thai Park -->
+    <div class="cuisine-card" id="cuisine-th" onclick="selectCuisine(this,'Thai Park 🇹🇭','🍜')">
+      <div class="cuisine-thumb" style="padding:0;overflow:hidden;">
+        <img src="images/foods_3.jpg" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentNode.innerHTML='🍜'"/>
+      </div>
+      <div class="cuisine-label"><span class="cuisine-flag">🇹🇭</span><br>Thai Park</div>
+      <div style="font-size:0.65rem;color:var(--text-light);padding:0 8px 8px;text-align:center;">Württembergische Str., 10707 Berlin 🗓️ Sat–Sun only</div>
+    </div>
+  </div>
+
+  <div class="restaurant-next-wrap" style="position:relative;z-index:1;">
+    <button class="btn btn-primary disabled" id="restaurant-next-btn" onclick="restaurantNext()" style="width:100%;" disabled>
+      Done! ✨
+    </button>
+  </div>
+</div>
+
+<!-- Restaurant confirmation modal -->
+<div class="modal-overlay" id="modal-restaurant">
+  <div class="modal-box">
+    <div class="modal-emoji">🍽️</div>
+    <div class="modal-title">So this is what we'll taste...</div>
+    <div class="modal-sub" id="modal-restaurant-text">Are you sure this is what you want for our birthday dinner? 🥂</div>
+    <div class="modal-btns">
+      <button class="btn btn-primary" onclick="confirmRestaurant(true)">Absolutely! 🎉</button>
+      <button class="btn btn-ghost" onclick="confirmRestaurant(false)">Let me reconsider...</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     FLOW A · STEP 4 — ADVENTURE DONE
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-adventure-done" style="background:url('images/last_page_background.jpg') center/cover no-repeat fixed;">
+  <div style="position:fixed;inset:0;background:rgba(255,228,240,0.7);pointer-events:none;z-index:0;"></div>
+  <div class="done-emoji">🎉</div>
+  <div class="sec-title" style="-webkit-text-fill-color:unset;background:none;color:var(--pink-deep);">
+    Our day is all set!
+  </div>
+  <p class="sec-sub" style="max-width:300px;line-height:1.7;">
+    You've planned the perfect birthday adventure for us. I can't wait to spend every moment of it with you 💕
+  </p>
+
+  <div class="summary-card">
+    <div class="summary-title">✨ Our Birthday Plan</div>
+    <div class="summary-item">
+      <span class="summary-icon">👕</span>
+      <div><div class="summary-text" id="sum-shirt">—</div><div class="summary-sub">What Danil wears</div></div>
+    </div>
+    <div class="summary-item">
+      <span class="summary-icon">👖</span>
+      <div><div class="summary-text" id="sum-pants">—</div><div class="summary-sub">And the pants</div></div>
+    </div>
+    <div class="summary-item">
+      <span class="summary-icon">☕</span>
+      <div><div class="summary-text" id="sum-cafe">—</div><div class="summary-sub">Our morning café</div></div>
+    </div>
+    <div class="summary-item">
+      <span class="summary-icon">🍽️</span>
+      <div><div class="summary-text" id="sum-restaurant">—</div><div class="summary-sub">Birthday dinner cuisine</div></div>
+    </div>
+  </div>
+
+  <button class="btn btn-ghost" onclick="goTo('page-home')" style="margin-top:8px;">
+    🏠 Back to Home
+  </button>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     FLOW B — "DO YOU LOVE ME?" GATE
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-love-gate">
+  <div class="love-gate-inner">
+    <div class="otter-pair">
+      <span class="otter-left" id="otter-left">🦦</span>
+      <span class="otter-right" id="otter-right">🦦</span>
+    </div>
+    <h1 class="love-question">Do you love me?</h1>
+    <p style="color:var(--text-light);font-size:0.88rem;font-style:italic;">Think carefully... 🥺</p>
+    <div class="love-buttons" id="love-buttons-wrap">
+      <button class="btn btn-primary" id="btn-yes-love" onclick="answerLove(true)">Yes 💕</button>
+      <button class="btn" id="btn-no-love" onclick="answerLove(false)">No</button>
+    </div>
+    <p class="love-hint" id="love-hint"></p>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     FLOW B — BIRTHDAY PAGE
+══════════════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════════════
+     INTRO SCREEN 1
+═══════════════════════════════════════════════════ -->
+<div class="screen active intro-screen" id="screen-intro1">
+  <div class="pixel-ground"></div>
+  <div class="intro-scene">
+    <div class="sprite-wrap">
+      <div class="sprite-label">DANIL</div>
+      <svg class="sprite-danil" viewBox="0 0 48 64" xmlns="http://www.w3.org/2000/svg" style="image-rendering:pixelated">
+        <!-- Head -->
+        <rect x="14" y="0" width="20" height="20" fill="#ffb997"/>
+        <!-- Hair -->
+        <rect x="12" y="0" width="24" height="6" fill="#3d2314"/>
+        <rect x="10" y="4" width="4" height="6" fill="#3d2314"/>
+        <rect x="34" y="4" width="4" height="6" fill="#3d2314"/>
+        <!-- Eyes -->
+        <rect x="18" y="8" width="4" height="4" fill="#fff"/>
+        <rect x="26" y="8" width="4" height="4" fill="#fff"/>
+        <rect x="19" y="9" width="2" height="2" fill="#3d2314"/>
+        <rect x="27" y="9" width="2" height="2" fill="#3d2314"/>
+        <!-- Mouth neutral -->
+        <rect x="19" y="15" width="10" height="2" fill="#c07050"/>
+        <!-- Body -->
+        <rect x="12" y="20" width="24" height="22" fill="#7c4dff"/>
+        <!-- Arms -->
+        <rect x="4" y="22" width="8" height="14" fill="#ffb997"/>
+        <rect x="36" y="22" width="8" height="14" fill="#ffb997"/>
+        <!-- Legs -->
+        <rect x="14" y="42" width="8" height="18" fill="#3d4db7"/>
+        <rect x="26" y="42" width="8" height="18" fill="#3d4db7"/>
+        <!-- Shoes -->
+        <rect x="12" y="56" width="12" height="8" fill="#1a1a2e"/>
+        <rect x="24" y="56" width="12" height="8" fill="#1a1a2e"/>
+      </svg>
+    </div>
+    <div class="sprite-wrap">
+      <svg class="sprite-dog" viewBox="0 0 40 36" xmlns="http://www.w3.org/2000/svg" style="image-rendering:pixelated">
+        <!-- Body -->
+        <rect x="8" y="14" width="24" height="14" fill="#c8a07a"/>
+        <!-- Head -->
+        <rect x="20" y="4" width="16" height="14" fill="#c8a07a"/>
+        <!-- Ear -->
+        <rect x="32" y="2" width="6" height="8" fill="#a07850"/>
+        <rect x="20" y="2" width="6" height="6" fill="#a07850"/>
+        <!-- Eye -->
+        <rect x="29" y="8" width="4" height="4" fill="#fff"/>
+        <rect x="30" y="9" width="2" height="2" fill="#1a1a2e"/>
+        <!-- Nose -->
+        <rect x="34" y="12" width="4" height="3" fill="#1a1a2e"/>
+        <!-- Snout -->
+        <rect x="34" y="10" width="6" height="6" fill="#e0b898"/>
+        <!-- Mouth -->
+        <rect x="35" y="14" width="4" height="2" fill="#c07050"/>
+        <!-- Tail -->
+        <rect x="0" y="10" width="8" height="6" fill="#c8a07a"/>
+        <rect x="0" y="6" width="6" height="6" fill="#c8a07a"/>
+        <!-- Legs -->
+        <rect x="10" y="26" width="6" height="8" fill="#a07850"/>
+        <rect x="18" y="26" width="6" height="8" fill="#a07850"/>
+        <rect x="26" y="26" width="6" height="8" fill="#a07850"/>
+      </svg>
+      <div class="sprite-label" style="margin-top:2px;">🐾</div>
+    </div>
+  </div>
+  <div class="dialogue-box">
+    <div class="dialogue-name">DANIL</div>
+    <div class="dialogue-text" id="txt-intro1"></div>
+  </div>
+  <button class="next-btn" id="btn-intro1" onclick="goTo('screen-intro2')">▶ NEXT</button>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     INTRO SCREEN 2
+═══════════════════════════════════════════════════ -->
+<div class="screen intro-screen" id="screen-intro2">
+  <div class="pixel-ground"></div>
+  <div class="intro-scene">
+    <div class="sprite-wrap">
+      <div class="sprite-label">DANIL</div>
+      <svg class="sprite-danil" viewBox="0 0 48 64" xmlns="http://www.w3.org/2000/svg" style="image-rendering:pixelated">
+        <rect x="14" y="0" width="20" height="20" fill="#ffb997"/>
+        <rect x="12" y="0" width="24" height="6" fill="#3d2314"/>
+        <rect x="10" y="4" width="4" height="6" fill="#3d2314"/>
+        <rect x="34" y="4" width="4" height="6" fill="#3d2314"/>
+        <rect x="18" y="8" width="4" height="4" fill="#fff"/>
+        <rect x="26" y="8" width="4" height="4" fill="#fff"/>
+        <rect x="19" y="9" width="2" height="2" fill="#3d2314"/>
+        <rect x="27" y="9" width="2" height="2" fill="#3d2314"/>
+        <rect x="19" y="15" width="10" height="2" fill="#c07050"/>
+        <rect x="12" y="20" width="24" height="22" fill="#7c4dff"/>
+        <rect x="4" y="22" width="8" height="14" fill="#ffb997"/>
+        <rect x="36" y="22" width="8" height="14" fill="#ffb997"/>
+        <rect x="14" y="42" width="8" height="18" fill="#3d4db7"/>
+        <rect x="26" y="42" width="8" height="18" fill="#3d4db7"/>
+        <rect x="12" y="56" width="12" height="8" fill="#1a1a2e"/>
+        <rect x="24" y="56" width="12" height="8" fill="#1a1a2e"/>
+      </svg>
+    </div>
+    <div class="sprite-wrap">
+      <svg class="sprite-dog" viewBox="0 0 40 36" xmlns="http://www.w3.org/2000/svg" style="image-rendering:pixelated">
+        <rect x="8" y="14" width="24" height="14" fill="#c8a07a"/>
+        <rect x="20" y="4" width="16" height="14" fill="#c8a07a"/>
+        <rect x="32" y="2" width="6" height="8" fill="#a07850"/>
+        <rect x="20" y="2" width="6" height="6" fill="#a07850"/>
+        <rect x="29" y="8" width="4" height="4" fill="#fff"/>
+        <rect x="30" y="9" width="2" height="2" fill="#1a1a2e"/>
+        <rect x="34" y="10" width="6" height="6" fill="#e0b898"/>
+        <rect x="35" y="14" width="4" height="2" fill="#c07050"/>
+        <rect x="0" y="10" width="8" height="6" fill="#c8a07a"/>
+        <rect x="0" y="6" width="6" height="6" fill="#c8a07a"/>
+        <rect x="10" y="26" width="6" height="8" fill="#a07850"/>
+        <rect x="18" y="26" width="6" height="8" fill="#a07850"/>
+        <rect x="26" y="26" width="6" height="8" fill="#a07850"/>
+      </svg>
+    </div>
+  </div>
+  <div class="dialogue-box">
+    <div class="dialogue-name">DANIL</div>
+    <div class="dialogue-text" id="txt-intro2"></div>
+  </div>
+  <button class="next-btn" id="btn-intro2" onclick="goTo('screen-intro3')">▶ NEXT</button>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     INTRO SCREEN 3
+═══════════════════════════════════════════════════ -->
+<div class="screen intro-screen" id="screen-intro3">
+  <div class="pixel-ground"></div>
+  <div class="intro-scene">
+    <div class="sprite-wrap">
+      <div class="sprite-label">DANIL</div>
+      <svg class="sprite-danil" viewBox="0 0 48 64" xmlns="http://www.w3.org/2000/svg" style="image-rendering:pixelated">
+        <rect x="14" y="0" width="20" height="20" fill="#ffb997"/>
+        <rect x="12" y="0" width="24" height="6" fill="#3d2314"/>
+        <rect x="10" y="4" width="4" height="6" fill="#3d2314"/>
+        <rect x="34" y="4" width="4" height="6" fill="#3d2314"/>
+        <rect x="18" y="8" width="4" height="4" fill="#fff"/>
+        <rect x="26" y="8" width="4" height="4" fill="#fff"/>
+        <rect x="19" y="9" width="2" height="2" fill="#3d2314"/>
+        <rect x="27" y="9" width="2" height="2" fill="#3d2314"/>
+        <rect x="19" y="15" width="10" height="2" fill="#c07050"/>
+        <rect x="12" y="20" width="24" height="22" fill="#7c4dff"/>
+        <rect x="4" y="22" width="8" height="14" fill="#ffb997"/>
+        <rect x="36" y="22" width="8" height="14" fill="#ffb997"/>
+        <rect x="14" y="42" width="8" height="18" fill="#3d4db7"/>
+        <rect x="26" y="42" width="8" height="18" fill="#3d4db7"/>
+        <rect x="12" y="56" width="12" height="8" fill="#1a1a2e"/>
+        <rect x="24" y="56" width="12" height="8" fill="#1a1a2e"/>
+      </svg>
+    </div>
+    <div class="sprite-wrap">
+      <svg class="sprite-dog" viewBox="0 0 40 36" xmlns="http://www.w3.org/2000/svg" style="image-rendering:pixelated">
+        <rect x="8" y="14" width="24" height="14" fill="#c8a07a"/>
+        <rect x="20" y="4" width="16" height="14" fill="#c8a07a"/>
+        <rect x="32" y="2" width="6" height="8" fill="#a07850"/>
+        <rect x="20" y="2" width="6" height="6" fill="#a07850"/>
+        <rect x="29" y="8" width="4" height="4" fill="#fff"/>
+        <rect x="30" y="9" width="2" height="2" fill="#1a1a2e"/>
+        <rect x="34" y="10" width="6" height="6" fill="#e0b898"/>
+        <rect x="35" y="14" width="4" height="2" fill="#c07050"/>
+        <rect x="0" y="10" width="8" height="6" fill="#c8a07a"/>
+        <rect x="0" y="6" width="6" height="6" fill="#c8a07a"/>
+        <rect x="10" y="26" width="6" height="8" fill="#a07850"/>
+        <rect x="18" y="26" width="6" height="8" fill="#a07850"/>
+        <rect x="26" y="26" width="6" height="8" fill="#a07850"/>
+      </svg>
+    </div>
+  </div>
+  <div class="dialogue-box">
+    <div class="dialogue-name">DANIL</div>
+    <div class="dialogue-text" id="txt-intro3"></div>
+  </div>
+  <button class="next-btn" id="btn-intro3" onclick="goTo('screen-intro4')">▶ NEXT</button>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     INTRO SCREEN 4 — START
+═══════════════════════════════════════════════════ -->
+<div class="screen intro-screen" id="screen-intro4">
+  <div class="pixel-ground"></div>
+  <div class="intro-scene">
+    <div class="sprite-wrap">
+      <div class="sprite-label">DANIL</div>
+      <svg class="sprite-danil" viewBox="0 0 48 64" xmlns="http://www.w3.org/2000/svg" style="image-rendering:pixelated">
+        <rect x="14" y="0" width="20" height="20" fill="#ffb997"/>
+        <rect x="12" y="0" width="24" height="6" fill="#3d2314"/>
+        <rect x="10" y="4" width="4" height="6" fill="#3d2314"/>
+        <rect x="34" y="4" width="4" height="6" fill="#3d2314"/>
+        <rect x="18" y="8" width="4" height="4" fill="#fff"/>
+        <rect x="26" y="8" width="4" height="4" fill="#fff"/>
+        <rect x="19" y="9" width="2" height="2" fill="#3d2314"/>
+        <rect x="27" y="9" width="2" height="2" fill="#3d2314"/>
+        <!-- smile -->
+        <rect x="18" y="15" width="12" height="2" fill="#c07050"/>
+        <rect x="18" y="13" width="2" height="2" fill="#c07050"/>
+        <rect x="28" y="13" width="2" height="2" fill="#c07050"/>
+        <rect x="12" y="20" width="24" height="22" fill="#7c4dff"/>
+        <rect x="4" y="22" width="8" height="14" fill="#ffb997"/>
+        <rect x="36" y="22" width="8" height="14" fill="#ffb997"/>
+        <rect x="14" y="42" width="8" height="18" fill="#3d4db7"/>
+        <rect x="26" y="42" width="8" height="18" fill="#3d4db7"/>
+        <rect x="12" y="56" width="12" height="8" fill="#1a1a2e"/>
+        <rect x="24" y="56" width="12" height="8" fill="#1a1a2e"/>
+      </svg>
+    </div>
+    <div class="sprite-wrap">
+      <svg class="sprite-dog" viewBox="0 0 40 36" xmlns="http://www.w3.org/2000/svg" style="image-rendering:pixelated">
+        <rect x="8" y="14" width="24" height="14" fill="#c8a07a"/>
+        <rect x="20" y="4" width="16" height="14" fill="#c8a07a"/>
+        <rect x="32" y="2" width="6" height="8" fill="#a07850"/>
+        <rect x="20" y="2" width="6" height="6" fill="#a07850"/>
+        <rect x="29" y="8" width="4" height="4" fill="#fff"/>
+        <rect x="30" y="9" width="2" height="2" fill="#1a1a2e"/>
+        <rect x="34" y="10" width="6" height="6" fill="#e0b898"/>
+        <rect x="35" y="14" width="4" height="2" fill="#c07050"/>
+        <rect x="0" y="10" width="8" height="6" fill="#c8a07a"/>
+        <rect x="0" y="6" width="6" height="6" fill="#c8a07a"/>
+        <rect x="10" y="26" width="6" height="8" fill="#a07850"/>
+        <rect x="18" y="26" width="6" height="8" fill="#a07850"/>
+        <rect x="26" y="26" width="6" height="8" fill="#a07850"/>
+      </svg>
+    </div>
+  </div>
+  <div class="dialogue-box">
+    <div class="dialogue-name">DANIL</div>
+    <div class="dialogue-text" id="txt-intro4"></div>
+  </div>
+  <button class="start-btn" id="btn-start" onclick="startQuiz()">★ START ★</button>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     QUIZ SCREEN
+═══════════════════════════════════════════════════ -->
+<div class="screen" id="screen-quiz">
+  <div class="hearts-bar">
+    <div class="hearts-left">
+      <span class="heart-icon" id="heart1">❤️</span>
+      <span class="heart-icon" id="heart2">❤️</span>
+      <span class="heart-icon" id="heart3">❤️</span>
+    </div>
+    <div class="quiz-progress" id="quiz-progress">Q 1 / 3</div>
+  </div>
+
+  <div class="question-panel">
+    <div class="question-num" id="question-num">QUESTION 1</div>
+    <div class="question-text" id="question-text">Loading...</div>
+  </div>
+
+  <div class="answers-grid" id="answers-grid">
+    <button class="answer-btn" id="ans-a" onclick="checkAnswer(0)"><span class="opt-label">A</span><span id="ans-a-txt"></span></button>
+    <button class="answer-btn" id="ans-b" onclick="checkAnswer(1)"><span class="opt-label">B</span><span id="ans-b-txt"></span></button>
+    <button class="answer-btn" id="ans-c" onclick="checkAnswer(2)"><span class="opt-label">C</span><span id="ans-c-txt"></span></button>
+    <button class="answer-btn" id="ans-d" onclick="checkAnswer(3)"><span class="opt-label">D</span><span id="ans-d-txt"></span></button>
+  </div>
+
+  <div class="quiz-feedback" id="quiz-feedback"></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     INTERLUDE SCREEN (between Q2 & Q3)
+═══════════════════════════════════════════════════ -->
+<div class="screen intro-screen" id="screen-interlude">
+  <div class="pixel-ground"></div>
+  <div class="intro-scene">
+    <div class="sprite-wrap">
+      <div class="sprite-label">DANIL</div>
+      <svg class="sprite-danil" viewBox="0 0 48 64" xmlns="http://www.w3.org/2000/svg" style="image-rendering:pixelated">
+        <rect x="14" y="0" width="20" height="20" fill="#ffb997"/>
+        <rect x="12" y="0" width="24" height="6" fill="#3d2314"/>
+        <rect x="10" y="4" width="4" height="6" fill="#3d2314"/>
+        <rect x="34" y="4" width="4" height="6" fill="#3d2314"/>
+        <rect x="18" y="8" width="4" height="4" fill="#fff"/>
+        <rect x="26" y="8" width="4" height="4" fill="#fff"/>
+        <rect x="19" y="9" width="2" height="2" fill="#3d2314"/>
+        <rect x="27" y="9" width="2" height="2" fill="#3d2314"/>
+        <rect x="19" y="15" width="10" height="2" fill="#c07050"/>
+        <rect x="12" y="20" width="24" height="22" fill="#7c4dff"/>
+        <rect x="4" y="22" width="8" height="14" fill="#ffb997"/>
+        <rect x="36" y="22" width="8" height="14" fill="#ffb997"/>
+        <rect x="14" y="42" width="8" height="18" fill="#3d4db7"/>
+        <rect x="26" y="42" width="8" height="18" fill="#3d4db7"/>
+        <rect x="12" y="56" width="12" height="8" fill="#1a1a2e"/>
+        <rect x="24" y="56" width="12" height="8" fill="#1a1a2e"/>
+      </svg>
+    </div>
+    <div class="sprite-wrap">
+      <svg class="sprite-dog" viewBox="0 0 40 36" xmlns="http://www.w3.org/2000/svg" style="image-rendering:pixelated">
+        <rect x="8" y="14" width="24" height="14" fill="#c8a07a"/>
+        <rect x="20" y="4" width="16" height="14" fill="#c8a07a"/>
+        <rect x="32" y="2" width="6" height="8" fill="#a07850"/>
+        <rect x="20" y="2" width="6" height="6" fill="#a07850"/>
+        <rect x="29" y="8" width="4" height="4" fill="#fff"/>
+        <rect x="30" y="9" width="2" height="2" fill="#1a1a2e"/>
+        <rect x="34" y="10" width="6" height="6" fill="#e0b898"/>
+        <rect x="35" y="14" width="4" height="2" fill="#c07050"/>
+        <rect x="0" y="10" width="8" height="6" fill="#c8a07a"/>
+        <rect x="0" y="6" width="6" height="6" fill="#c8a07a"/>
+        <rect x="10" y="26" width="6" height="8" fill="#a07850"/>
+        <rect x="18" y="26" width="6" height="8" fill="#a07850"/>
+        <rect x="26" y="26" width="6" height="8" fill="#a07850"/>
+      </svg>
+    </div>
+  </div>
+  <div class="dialogue-box">
+    <div class="dialogue-name">DANIL</div>
+    <div class="dialogue-text" id="txt-interlude"></div>
+  </div>
+  <button class="next-btn" id="btn-interlude" onclick="loadQuestion(2)">▶ NEXT</button>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     GAME OVER
+═══════════════════════════════════════════════════ -->
+<div class="screen" id="screen-gameover" style="flex-direction:column;">
+  <div class="gameover-title">GAME OVER</div>
+  <div class="gameover-sub">Don't give up, my love!<br>Try again — I believe in you! 💕</div>
+  <button class="restart-btn" onclick="restartQuiz()">▶ TRY AGAIN</button>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     WIN SCREEN
+═══════════════════════════════════════════════════ -->
+<div class="screen intro-screen" id="screen-win">
+  <div class="pixel-ground"></div>
+  <div class="intro-scene">
+    <div class="sprite-wrap">
+      <div class="sprite-label">DANIL</div>
+      <!-- Celebrating sprite (arms up) -->
+      <svg class="sprite-danil" viewBox="0 0 48 64" xmlns="http://www.w3.org/2000/svg" style="image-rendering:pixelated">
+        <rect x="14" y="0" width="20" height="20" fill="#ffb997"/>
+        <rect x="12" y="0" width="24" height="6" fill="#3d2314"/>
+        <rect x="10" y="4" width="4" height="6" fill="#3d2314"/>
+        <rect x="34" y="4" width="4" height="6" fill="#3d2314"/>
+        <rect x="18" y="8" width="4" height="4" fill="#fff"/>
+        <rect x="26" y="8" width="4" height="4" fill="#fff"/>
+        <rect x="19" y="9" width="2" height="2" fill="#3d2314"/>
+        <rect x="27" y="9" width="2" height="2" fill="#3d2314"/>
+        <!-- big smile -->
+        <rect x="18" y="15" width="12" height="2" fill="#c07050"/>
+        <rect x="18" y="13" width="2" height="2" fill="#c07050"/>
+        <rect x="28" y="13" width="2" height="2" fill="#c07050"/>
+        <!-- cheeks -->
+        <rect x="14" y="13" width="4" height="4" fill="#ffb3c6" opacity="0.7"/>
+        <rect x="30" y="13" width="4" height="4" fill="#ffb3c6" opacity="0.7"/>
+        <rect x="12" y="20" width="24" height="22" fill="#7c4dff"/>
+        <!-- Arms up -->
+        <rect x="0" y="8" width="12" height="6" fill="#ffb997"/>
+        <rect x="36" y="8" width="12" height="6" fill="#ffb997"/>
+        <rect x="14" y="42" width="8" height="18" fill="#3d4db7"/>
+        <rect x="26" y="42" width="8" height="18" fill="#3d4db7"/>
+        <rect x="12" y="56" width="12" height="8" fill="#1a1a2e"/>
+        <rect x="24" y="56" width="12" height="8" fill="#1a1a2e"/>
+      </svg>
+    </div>
+    <div class="sprite-wrap">
+      <svg class="sprite-dog" viewBox="0 0 40 36" xmlns="http://www.w3.org/2000/svg" style="image-rendering:pixelated">
+        <rect x="8" y="14" width="24" height="14" fill="#c8a07a"/>
+        <rect x="20" y="4" width="16" height="14" fill="#c8a07a"/>
+        <rect x="32" y="2" width="6" height="8" fill="#a07850"/>
+        <rect x="20" y="2" width="6" height="6" fill="#a07850"/>
+        <rect x="29" y="8" width="4" height="4" fill="#fff"/>
+        <rect x="30" y="9" width="2" height="2" fill="#1a1a2e"/>
+        <rect x="34" y="10" width="6" height="6" fill="#e0b898"/>
+        <rect x="35" y="14" width="4" height="2" fill="#c07050"/>
+        <rect x="0" y="10" width="8" height="6" fill="#c8a07a"/>
+        <rect x="0" y="6" width="6" height="6" fill="#c8a07a"/>
+        <rect x="10" y="26" width="6" height="8" fill="#a07850"/>
+        <rect x="18" y="26" width="6" height="8" fill="#a07850"/>
+        <rect x="26" y="26" width="6" height="8" fill="#a07850"/>
+      </svg>
+    </div>
+  </div>
+  <div class="dialogue-box">
+    <div class="dialogue-name">DANIL</div>
+    <div class="dialogue-text" id="txt-win"></div>
+  </div>
+  <button class="next-btn" id="btn-win" onclick="goTo('screen-gift'); setTimeout(showEnvelope, 3000)">▶ OPEN GIFT</button>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     GIFT PAGE
+═══════════════════════════════════════════════════ -->
+<div class="screen" id="screen-gift" style="align-items:center;justify-content:center;">
+  <div class="gift-bg-overlay"></div>
+
+  <!-- Dummy birthday illustration -->
+  <div style="position:absolute;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;opacity:0.15;font-size:8rem;">
+    🎂
+  </div>
+
+  <div class="gift-content">
+    <div class="gift-bday-text">Happy Birthday!</div>
+    <div style="display:flex;gap:16px;font-size:2.5rem;align-items:center;">
+      <span style="animation:giftBounce 1.5s 0.2s ease-in-out infinite;">🌷</span>
+      <div class="gift-photo-frame">
+        <!-- Her photo goes here — placeholder -->
+        🌸
+      </div>
+      <span style="animation:giftBounce 1.5s 0.4s ease-in-out infinite;">🌷</span>
+    </div>
+    <div style="font-size:1.8rem;animation:giftBounce 1.8s ease-in-out infinite;">🎂</div>
+
+    <!-- Envelope appears after 3s -->
+    <div class="envelope-wrap" id="envelope-wrap" style="display:none;" onclick="goTo('screen-letter'); initLetter()">
+      <div class="envelope-icon">💌</div>
+      <div class="envelope-label">A little something I wrote just for your heart — tap to open 💌</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     LETTER PAGE
+═══════════════════════════════════════════════════ -->
+<div class="screen" id="screen-letter" style="overflow-y:auto;">
+  <div class="letter-wrap">
+    <div class="envelope-open-anim">💌 ✉️ 📨</div>
+    <div class="letter-paper">
+      <p class="letter-greeting">My dearest Khaerine,</p>
+      <div class="letter-body">
+        <p>Happy Birthday, my love. 🎂</p>
+        <p>I still remember the first time I called you "Khae" — it just felt right, like it was always meant to be your name in my world.</p>
+        <p>There are so many moments I carry with me. Walking through Heidelberg with you, my heart pounding as I asked you to be mine. Our first trip abroad — Greece — where everything felt like a dream I never wanted to wake from.</p>
+        <div class="letter-deco">🌷 💛 🌷</div>
+        <p>Every café we find together, every vintage treasure we discover, every quiet moment in the sun — they all feel like gifts because you are in them.</p>
+        <p>You make ordinary moments feel like magic. And on this day, I want you to know: you are so deeply loved. Not just today, but every single day.</p>
+        <p>This little world I made — it is all for you. Because you deserve a whole world, and I want to be the one who gives it to you. 🌍</p>
+        <p>Happy Birthday, Khaerine. My love, my adventure, my home. 🤍</p>
+      </div>
+      <p class="letter-sig">Forever yours, Danil 🌸</p>
+    </div>
+  </div>
+  <button class="letter-next-btn" onclick="openLetterModal()">Continue ▶</button>
+</div>
+
+<!-- Letter modal -->
+<div class="letter-modal-overlay" id="letter-modal">
+  <div class="letter-modal-box">
+    <div class="letter-modal-emoji">🥺</div>
+    <div class="letter-modal-title">Did you read every word?</div>
+    <div class="letter-modal-sub">Every word was written from the bottom of my heart...</div>
+    <div class="letter-modal-btns">
+      <button class="lm-btn lm-btn-yes" onclick="confirmLetter(true)">Yes, every single one 💕</button>
+      <button class="lm-btn lm-btn-no" onclick="confirmLetter(false)">Let me read it again...</button>
+    </div>
+  </div>
+</div>
+
+<!-- After reading message -->
+<div class="letter-modal-overlay" id="letter-after">
+  <div class="letter-modal-box">
+    <div class="letter-modal-emoji">🌸</div>
+    <div class="letter-modal-title">I'm so glad...</div>
+    <div class="letter-modal-sub">I'm so happy you read it all, my love. And there's still more waiting for you... 🎁</div>
+    <div class="letter-modal-btns">
+      <button class="lm-btn lm-btn-yes" onclick="goToCollage()">I'm ready 🌟</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     COLLAGE PAGE
+═══════════════════════════════════════════════════ -->
+<div class="screen" id="screen-collage">
+  <div class="collage-bg" id="collage-bg"></div>
+  <div class="collage-center-msg" id="collage-msg">I made a little world just for you 🌸</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     OUR PHOTOS PAGE
+═══════════════════════════════════════════════════ -->
+<div class="screen" id="screen-ourphotos">
+  <div class="ourphotos-bg">
+    <div class="ourphoto-slot">📸</div>
+    <div class="ourphoto-slot">🌸</div>
+    <div class="ourphoto-slot">💕</div>
+    <div class="ourphoto-slot">✨</div>
+  </div>
+  <div class="ourphotos-msg" id="ourphotos-msg">
+    Thank you for being mine, and for every moment we have shared together 🤍
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     CREDITS PAGE
+═══════════════════════════════════════════════════ -->
+<div class="screen" id="screen-credits" style="overflow:hidden;position:relative;">
+  <div class="credits-bg">
+    <div class="credit-photo-slot">📸</div>
+    <div class="credit-photo-slot">🌸</div>
+    <div class="credit-photo-slot">💕</div>
+    <div class="credit-photo-slot">✨</div>
+  </div>
+  <div class="credits-overlay"></div>
+  <div class="credits-scroll" id="credits-scroll">
+    <div style="height:40vh;"></div>
+
+    <div class="credits-heart">💗</div>
+
+    <div>
+      <div class="credits-role">A BIRTHDAY SURPRISE</div>
+      <div class="credits-title">Created with all my love</div>
+    </div>
+    <div class="credits-divider"></div>
+    <div>
+      <div class="credits-role">MADE BY</div>
+      <div class="credits-name">Danil</div>
+    </div>
+    <div class="credits-divider"></div>
+    <div>
+      <div class="credits-role">BUILT WITH THE HELP OF</div>
+      <div class="credits-name">Claude ✨</div>
+    </div>
+    <div class="credits-divider"></div>
+    <div>
+      <div class="credits-role">FOR THE MOST BEAUTIFUL PERSON</div>
+      <div class="credits-special">Khaerine</div>
+    </div>
+    <div class="credits-divider"></div>
+    <div>
+      <div class="credits-role">ON THIS SPECIAL DAY</div>
+      <div class="credits-date">3 MAI 🌸</div>
+    </div>
+
+    <div style="height:20px;"></div>
+    <div class="credits-heart">🤍</div>
+    <div style="height:60vh;"></div>
+  </div>
+</div>
+
+
+
+<!-- ══════════════════════════════════════════════════════
+     LOCKED BIRTHDAY MODAL
+══════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-locked">
+  <div class="modal-box">
+    <div class="modal-emoji">🔒</div>
+    <div class="modal-title">Not yet, my love!</div>
+    <div class="modal-sub">This section unlocks on your special day — 3 Mai. Just a little more waiting! 🌸</div>
+    <div class="modal-btns">
+      <button class="btn btn-primary" onclick="closeModal('modal-locked')">Okay 💕</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  // ═══════════════════════════════════════════
+  //  UNIFIED NAVIGATION — handles both .page (main) and .screen (birthday)
+  // ═══════════════════════════════════════════
+  function goTo(id) {
+    // Hide all pages and screens
+    document.querySelectorAll('.page, .screen').forEach(el => {
+      el.classList.remove('active');
+      el.style.display = '';
+    });
+    const target = document.getElementById(id);
+    if (!target) return;
+    target.classList.add('active');
+    window.scrollTo(0, 0);
+
+    // Birthday screen triggers
+    if (id === 'screen-intro1')    startIntroTyping(1);
+    if (id === 'screen-intro2')    startIntroTyping(2);
+    if (id === 'screen-intro3')    startIntroTyping(3);
+    if (id === 'screen-intro4')    startIntroTyping(4);
+    if (id === 'screen-interlude') startInterlude();
+    if (id === 'screen-win')       startWin();
+  }
+
+  // ═══════════════════════════════════════════
+  //  PAGE 1 — PASSWORD
+  // ═══════════════════════════════════════════
+  const CORRECT_PASSWORD = '06092025';
+
+  document.getElementById('pw-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') checkPassword();
+  });
+
+  function checkPassword() {
+    const val = document.getElementById('pw-input').value.trim();
+    const err = document.getElementById('pw-error');
+    const inp = document.getElementById('pw-input');
+    if (val === CORRECT_PASSWORD) {
+      inp.classList.remove('error');
+      err.textContent = '';
+      startAudio(); // 🎵 start music on first interaction
+      goTo('page-home');
+      initCountdown();
+      checkBirthdayLock();
+    } else {
+      inp.classList.add('error');
+      err.textContent = '❌ That\'s not quite right — try again!';
+      inp.value = '';
+      setTimeout(() => inp.classList.remove('error'), 500);
+    }
+  }
+
+  // ═══════════════════════════════════════════
+  //  PAGE 2 — HOMEPAGE
+  // ═══════════════════════════════════════════
+  function checkBirthdayLock() {
+    const now = new Date();
+    const birthday = new Date(now.getFullYear(), 4, 3); // May 3 (month is 0-indexed)
+    const isUnlocked = now >= birthday;
+    const card = document.getElementById('birthday-card');
+    const badge = document.getElementById('birthday-lock-badge');
+    if (isUnlocked) {
+      card.classList.remove('locked');
+      badge.style.display = 'none';
+    }
+  }
+
+  function tryOpenBirthday() {
+    const now = new Date();
+    const birthday = new Date(now.getFullYear(), 4, 3);
+    if (now >= birthday) {
+      goTo('page-love-gate');
+    } else {
+      openModal('modal-locked');
+    }
+  }
+
+  // ═══════════════════════════════════════════
+  //  COUNTDOWN
+  // ═══════════════════════════════════════════
+  function initCountdown() {
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  }
+
+  function updateCountdown() {
+    const now = new Date();
+    let target = new Date(now.getFullYear(), 4, 3); // May 3
+    if (now > target) target.setFullYear(target.getFullYear() + 1);
+    const diff = target - now;
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000) / 60000);
+    const secs  = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent  = String(days).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(mins).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(secs).padStart(2,'0');
+  }
+
+  // ═══════════════════════════════════════════
+  //  FLOW A — ADVENTURE
+  // ═══════════════════════════════════════════
+  function startAdventure() {
+    openRetro();
+  }
+
+  function openRetro()  { document.getElementById('retro-welcome').classList.add('open'); }
+  function closeRetroAndGo() {
+    document.getElementById('retro-welcome').classList.remove('open');
+    goTo('page-outfit');
+  }
+
+  // --- OUTFIT PICKER ---
+  let selectedShirt = null;
+  let selectedPants = null;
+
+  const shirtColors = ['#c8e6c9','#bbdefb','#ffe0b2'];
+  const pantsColors = ['#90a4ae','#a5d6a7','#ce93d8'];
+  const shirtLabels = ['Shirt A','Shirt B','Shirt C'];
+  const pantsLabels = ['Pants A','Pants B','Pants C'];
+
+  function selectOutfit(el) {
+    const type = el.dataset.type;
+    const idx  = parseInt(el.dataset.idx);
+    const color= el.dataset.color;
+    const emoji= el.dataset.emoji;
+
+    const opts = document.querySelectorAll(`.outfit-opt[data-type="${type}"]`);
+
+    if (el.classList.contains('selected')) {
+      // Deselect
+      el.classList.remove('selected');
+      opts.forEach(o => o.classList.remove('disabled-opt'));
+      if (type==='shirt') {
+        selectedShirt = null;
+        document.getElementById('torso-bg').setAttribute('fill','#f0e6f6');
+        document.getElementById('shirt-slot').innerHTML = '<span style="font-size:0.7rem;">👕 no shirt yet</span>';
+        document.getElementById('shirt-slot').classList.remove('filled');
+      } else {
+        selectedPants = null;
+        document.getElementById('pants-bg').setAttribute('fill','#e8d5f0');
+        document.getElementById('pants-slot').innerHTML = '<span style="font-size:0.7rem;">👖 no pants yet</span>';
+        document.getElementById('pants-slot').classList.remove('filled');
+      }
+    } else {
+      // Select
+      opts.forEach(o => { o.classList.remove('selected'); o.classList.add('disabled-opt'); });
+      el.classList.remove('disabled-opt');
+      el.classList.add('selected');
+
+      if (type==='shirt') {
+        selectedShirt = { label: shirtLabels[idx], color };
+        document.getElementById('torso-bg').setAttribute('fill', color);
+        document.getElementById('shirt-slot').innerHTML = `<span class="outfit-slot-icon">${emoji}</span><span style="font-size:0.75rem;font-weight:700;">${shirtLabels[idx]}</span>`;
+        document.getElementById('shirt-slot').classList.add('filled');
+      } else {
+        selectedPants = { label: pantsLabels[idx], color };
+        document.getElementById('pants-bg').setAttribute('fill', color);
+        document.getElementById('pants-slot').innerHTML = `<span class="outfit-slot-icon">${emoji}</span><span style="font-size:0.75rem;font-weight:700;">${pantsLabels[idx]}</span>`;
+        document.getElementById('pants-slot').classList.add('filled');
+      }
+    }
+
+    // Check if both selected → smile + show next
+    if (selectedShirt && selectedPants) {
+      document.getElementById('face-neutral-img').style.display = 'none';
+      document.getElementById('face-smile-img').style.display   = 'block';
+      const nextBtn = document.getElementById('outfit-next-btn');
+      nextBtn.style.display = 'inline-flex';
+      nextBtn.style.animation = 'pageIn 0.4s ease both';
+    } else {
+      document.getElementById('face-neutral-img').style.display = 'block';
+      document.getElementById('face-smile-img').style.display   = 'none';
+      document.getElementById('outfit-next-btn').style.display = 'none';
+    }
+  }
+
+  // --- CAFÉ PICKER ---
+  let selectedCafe = null;
+  const cafeNames = ['Café Sonnenschein','Bloom & Brew','The Vintage Cup'];
+
+  function selectCafe(idx) {
+    const cards = document.querySelectorAll('.cafe-card');
+    const card  = document.getElementById(`cafe-${idx}`);
+
+    if (card.classList.contains('selected')) {
+      card.classList.remove('selected');
+      document.getElementById(`cafe-thumb-${idx}`).classList.remove('grey-out');
+      cards.forEach(c => c.classList.remove('disabled-card'));
+      selectedCafe = null;
+      disableBtn('cafe-next-btn', true);
+      return;
+    }
+
+    cards.forEach((c,i) => {
+      c.classList.remove('selected');
+      if (i !== idx) {
+        c.classList.add('disabled-card');
+        document.getElementById(`cafe-thumb-${i}`).classList.add('grey-out');
+      } else {
+        c.classList.remove('disabled-card');
+        document.getElementById(`cafe-thumb-${i}`).classList.remove('grey-out');
+      }
+    });
+    card.classList.add('selected');
+    selectedCafe = idx;
+    disableBtn('cafe-next-btn', false);
+  }
+
+  function cafeNext() {
+    if (selectedCafe === null) return;
+    document.getElementById('modal-cafe-text').textContent = `You picked "${cafeNames[selectedCafe]}" as our morning spot. Are you sure? 🌸`;
+    openModal('modal-cafe');
+  }
+
+  function confirmCafe(yes) {
+    closeModal('modal-cafe');
+    if (yes) {
+      goTo('page-restaurant');
+    } else {
+      // Reset café selection
+      document.querySelectorAll('.cafe-card').forEach(c => {
+        c.classList.remove('selected','disabled-card');
+      });
+      document.querySelectorAll('.cafe-thumb').forEach(t => t.classList.remove('grey-out'));
+      selectedCafe = null;
+      disableBtn('cafe-next-btn', true);
+    }
+  }
+
+  // --- RESTAURANT PICKER ---
+  let selectedCuisine = null;
+
+  function selectCuisine(el, label, dish) {
+    const cards = document.querySelectorAll('.cuisine-card');
+
+    if (el.classList.contains('selected')) {
+      el.classList.remove('selected');
+      cards.forEach(c => c.classList.remove('disabled-card'));
+      selectedCuisine = null;
+      document.getElementById('dishes-on-table').style.display = 'none';
+      disableBtn('restaurant-next-btn', true);
+      return;
+    }
+
+    cards.forEach(c => {
+      if (c !== el) c.classList.add('disabled-card');
+      else c.classList.remove('disabled-card');
+    });
+    el.classList.add('selected');
+    selectedCuisine = { label, dish };
+
+    // Show dishes on table
+    document.getElementById('dishes-on-table').style.display = 'block';
+    document.getElementById('dish-left').textContent  = dish;
+    document.getElementById('dish-right').textContent = dish;
+    disableBtn('restaurant-next-btn', false);
+  }
+
+  function restaurantNext() {
+    if (!selectedCuisine) return;
+    document.getElementById('modal-restaurant-text').textContent =
+      `So we're going for ${selectedCuisine.label} for your birthday dinner. Are you sure? 🥂`;
+    openModal('modal-restaurant');
+  }
+
+  function confirmRestaurant(yes) {
+    closeModal('modal-restaurant');
+    if (yes) {
+      // Fill summary
+      document.getElementById('sum-shirt').textContent      = selectedShirt  ? selectedShirt.label  : '—';
+      document.getElementById('sum-pants').textContent      = selectedPants  ? selectedPants.label  : '—';
+      document.getElementById('sum-cafe').textContent       = selectedCafe !== null ? cafeNames[selectedCafe] : '—';
+      document.getElementById('sum-restaurant').textContent = selectedCuisine ? selectedCuisine.label : '—';
+      goTo('page-adventure-done');
+      launchConfetti();
+    } else {
+      document.querySelectorAll('.cuisine-card').forEach(c => { c.classList.remove('selected','disabled-card'); });
+      selectedCuisine = null;
+      document.getElementById('dishes-on-table').style.display = 'none';
+      disableBtn('restaurant-next-btn', true);
+    }
+  }
+
+  // ═══════════════════════════════════════════
+  //  FLOW B — LOVE GATE
+  // ═══════════════════════════════════════════
+  let noPresses = 0;
+
+  function answerLove(yes) {
+    if (yes) {
+      // Otters come together then go to 8-bit intro
+      document.getElementById('otter-left').style.transform  = 'translateX(10px)';
+      document.getElementById('otter-right').style.transform = 'translateX(-10px)';
+      setTimeout(() => {
+        goTo('screen-intro1');
+      }, 700);
+    } else {
+      noPresses++;
+      runAwayNo();
+      const hint = document.getElementById('love-hint');
+      const hints = [
+        'Are you sure about that? 🥺',
+        'Come on, try again... 😅',
+        'You can\'t catch it! 😂',
+        'The "No" button is too shy 🙈',
+        'Maybe try "Yes"? Just saying... 💕'
+      ];
+      hint.textContent = hints[Math.min(noPresses-1, hints.length-1)];
+
+      // Otters separate
+      document.getElementById('otter-left').style.transform  = `translateX(-${15 + noPresses*5}px)`;
+      document.getElementById('otter-right').style.transform = `translateX(${15 + noPresses*5}px)`;
+      setTimeout(() => {
+        document.getElementById('otter-left').style.transform  = 'translateX(0)';
+        document.getElementById('otter-right').style.transform = 'translateX(0)';
+      }, 800);
+    }
+  }
+
+  function runAwayNo() {
+    const btn  = document.getElementById('btn-no-love');
+    const wrap = document.getElementById('love-buttons-wrap');
+    const wrapRect = wrap.getBoundingClientRect();
+
+    // Get viewport dimensions
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const bw = btn.offsetWidth;
+    const bh = btn.offsetHeight;
+
+    // Random position within viewport, but not overlapping yes button
+    let rx, ry;
+    let tries = 0;
+    do {
+      rx = Math.random() * (vw - bw - 40) + 20;
+      ry = Math.random() * (vh - bh - 40) + 20;
+      tries++;
+    } while (tries < 20 && Math.abs(rx - vw/2) < 160 && Math.abs(ry - vh/2) < 120);
+
+    btn.style.position = 'fixed';
+    btn.style.left = rx + 'px';
+    btn.style.top  = ry + 'px';
+    btn.style.zIndex = '500';
+    btn.style.margin = '0';
+  }
+
+  // Make "No" escape on hover too (before tap on mobile)
+  document.addEventListener('DOMContentLoaded', () => {
+    const noBtn = document.getElementById('btn-no-love');
+    noBtn.addEventListener('mouseover', () => {
+      if (noPresses >= 0) runAwayNo();
+    });
+  });
+
+  // ═══════════════════════════════════════════
+  //  BIRTHDAY PAGE INIT
+  // ═══════════════════════════════════════════
+  function initBirthdayPage() {
+    // floating hearts
+    const bg = document.getElementById('hearts-bg');
+    bg.innerHTML = '';
+    const emojis = ['🤍','💕','🌸','💖','✨','🌷'];
+    for (let i=0;i<18;i++) {
+      const h = document.createElement('span');
+      h.className = 'heart-float';
+      h.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      h.style.left = Math.random()*100+'%';
+      h.style.animationDuration = (Math.random()*12+10)+'s';
+      h.style.animationDelay    = (Math.random()*10)+'s';
+      bg.appendChild(h);
+    }
+
+    // scroll reveal
+    const reveals = document.querySelectorAll('#page-birthday .reveal');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+    }, {threshold:0.15});
+    reveals.forEach(r => obs.observe(r));
+
+    // nav dots
+    const dots    = document.querySelectorAll('.nav-dot');
+    const secIds  = ['bday-hero','bday-letter','bday-memories','bday-berlin','bday-song','bday-closing'];
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        document.getElementById(secIds[i]).scrollIntoView({behavior:'smooth'});
+      });
+    });
+    const dotObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if(e.isIntersecting) {
+          const idx = secIds.indexOf(e.target.id);
+          dots.forEach(d => d.classList.remove('active'));
+          if(idx>=0) dots[idx].classList.add('active');
+        }
+      });
+    },{threshold:0.4});
+    secIds.forEach(id => { const el=document.getElementById(id); if(el) dotObs.observe(el); });
+  }
+
+  // Vinyl player
+  let playing = false;
+  function togglePlay() {
+    playing = !playing;
+    document.getElementById('play-btn').textContent = playing ? '⏸️':'▶️';
+    document.getElementById('vinyl').classList.toggle('playing', playing);
+  }
+
+  // ═══════════════════════════════════════════
+  //  CONFETTI
+  // ═══════════════════════════════════════════
+  function launchConfetti() {
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx    = canvas.getContext('2d');
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const colors  = ['#f4a7b9','#d4b8e0','#ffcba4','#b5ead7','#fff0a0','#e57a99'];
+    const pieces  = [];
+    for (let i=0;i<140;i++) {
+      pieces.push({
+        x: Math.random()*canvas.width, y: Math.random()*canvas.height - canvas.height,
+        r: Math.random()*7+4, d: Math.random()*3+1,
+        color: colors[Math.floor(Math.random()*colors.length)],
+        tiltAngle:0, tiltSpeed: Math.random()*0.07+0.02,
+        shape: Math.random()>0.5?'circle':'rect'
+      });
+    }
+    let active = true;
+    function draw() {
+      if (!active) return;
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      pieces.forEach(p => {
+        ctx.beginPath(); ctx.fillStyle=p.color; ctx.globalAlpha=0.85;
+        if(p.shape==='circle') ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        else ctx.rect(p.x,p.y,p.r*2,p.r);
+        ctx.fill();
+        p.y += p.d; p.tiltAngle += p.tiltSpeed; p.x += Math.sin(p.tiltAngle)*1.5;
+        if(p.y > canvas.height) { p.y=-10; p.x=Math.random()*canvas.width; }
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+    setTimeout(() => { active=false; ctx.clearRect(0,0,canvas.width,canvas.height); }, 5000);
+  }
+
+  // ═══════════════════════════════════════════
+  //  MODAL HELPERS
+  // ═══════════════════════════════════════════
+  function openModal(id)  { document.getElementById(id).classList.add('open'); }
+  function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+  function disableBtn(id, disabled) {
+    const btn = document.getElementById(id);
+    btn.disabled = disabled;
+    disabled ? btn.classList.add('disabled') : btn.classList.remove('disabled');
+  }
+
+  // ═══════════════════════════════════════════
+  //  RESIZE
+  // ═══════════════════════════════════════════
+  window.addEventListener('resize', () => {
+    const c = document.getElementById('confetti-canvas');
+    c.width  = window.innerWidth;
+    c.height = window.innerHeight;
+  });
+// ═══════════════════════════════════════════
+//  TYPEWRITER
+// ═══════════════════════════════════════════
+let activeTypeTimer = null; // track active timer so we can cancel it
+
+function typewrite(elId, text, speed, onDone) {
+  // Cancel any previous typing that's still running
+  if (activeTypeTimer) {
+    clearInterval(activeTypeTimer);
+    activeTypeTimer = null;
+  }
+
+  const el = document.getElementById(elId);
+  if (!el) return;
+  el.innerHTML = '';
+  let i = 0;
+
+  const cursor = document.createElement('span');
+  cursor.className = 'dialogue-cursor';
+  el.appendChild(cursor);
+
+  activeTypeTimer = setInterval(() => {
+    // Safety check — stop if cursor was removed from DOM
+    if (!cursor.parentNode) {
+      clearInterval(activeTypeTimer);
+      activeTypeTimer = null;
+      return;
+    }
+
+    if (i < text.length) {
+      el.insertBefore(document.createTextNode(text[i]), cursor);
+      i++;
+    } else {
+      clearInterval(activeTypeTimer);
+      activeTypeTimer = null;
+      cursor.style.animation = 'blink 1s step-end infinite';
+      if (onDone) onDone();
+    }
+  }, speed || 40);
+}
+
+// ═══════════════════════════════════════════
+//  INTRO SCREENS
+// ═══════════════════════════════════════════
+const introLines = [
+  "Hi love! Since today is your birthday...",
+  "I made this little game just for you — and I promise I made it easy!",
+  "You only have 3 chances... but that's all you'll need to claim your gift!",
+  "Alright, are you ready? Hit START when you are!"
+];
+
+function startIntroTyping(screenNum) {
+  const txtId   = `txt-intro${screenNum}`;
+  const btnId   = screenNum < 4 ? `btn-intro${screenNum}` : `btn-start`;
+  const line    = introLines[screenNum - 1];
+  const btn     = document.getElementById(btnId);
+  btn.style.display = 'none';
+  typewrite(txtId, line, 38, () => {
+    btn.style.display = 'block';
+  });
+}
+
+// Start first screen
+window.addEventListener('DOMContentLoaded', () => {
+  startIntroTyping(1);
+});
+
+// ═══════════════════════════════════════════
+//  QUIZ ENGINE
+// ═══════════════════════════════════════════
+const questions = [
+  {
+    q: "What was the very first nickname I ever called you?",
+    opts: ["Kerin","Khae","Nang","Ketrine"],
+    correct: 1 // index of correct answer (Khae)
+  },
+  {
+    q: "Where were we when I asked you to be mine?",
+    opts: ["Siantar","Padang","Heidelberg","Darmstadt"],
+    correct: 2 // Heidelberg
+  },
+  {
+    q: "Where did we go on our very first trip abroad together?",
+    opts: ["Russia","Spain","Italy","Greece"],
+    correct: 3 // Greece
+  }
+];
+
+let currentQ    = 0;
+let hearts      = 3;
+let answered    = false;
+
+function startQuiz() {
+  currentQ = 0;
+  hearts   = 3;
+  updateHearts();
+  goTo('screen-quiz');
+  loadQuestion(0);
+}
+
+function restartQuiz() {
+  startQuiz();
+}
+
+function loadQuestion(idx) {
+  currentQ = idx;
+  answered = false;
+  goTo('screen-quiz');
+
+  const q = questions[idx];
+  document.getElementById('question-num').textContent  = `QUESTION ${idx + 1}`;
+  document.getElementById('quiz-progress').textContent = `Q ${idx + 1} / 3`;
+  document.getElementById('question-text').textContent = q.q;
+  document.getElementById('quiz-feedback').textContent = '';
+
+  const labels = ['A','B','C','D'];
+  const ids    = ['ans-a','ans-b','ans-c','ans-d'];
+  const txtIds = ['ans-a-txt','ans-b-txt','ans-c-txt','ans-d-txt'];
+
+  ids.forEach((id, i) => {
+    const btn = document.getElementById(id);
+    btn.className = 'answer-btn';
+    btn.disabled  = false;
+    document.querySelector(`#${id} .opt-label`).textContent = labels[i];
+    document.getElementById(txtIds[i]).textContent = q.opts[i];
+  });
+}
+
+function checkAnswer(selectedIdx) {
+  if (answered) return;
+  answered = true;
+
+  const q       = questions[currentQ];
+  const isRight = selectedIdx === q.correct;
+  const ids     = ['ans-a','ans-b','ans-c','ans-d'];
+  const fb      = document.getElementById('quiz-feedback');
+
+  // Disable all buttons
+  ids.forEach(id => { document.getElementById(id).disabled = true; });
+
+  if (isRight) {
+    document.getElementById(ids[selectedIdx]).classList.add('correct');
+    fb.style.color = 'var(--bit-green)';
+    fb.textContent = '✓ CORRECT!';
+
+    setTimeout(() => {
+      if (currentQ === 0) {
+        // Q1 done → Q2
+        loadQuestion(1);
+      } else if (currentQ === 1) {
+        // Q2 done → interlude
+        goTo('screen-interlude');
+      } else {
+        // Q3 done → win!
+        goTo('screen-win');
+      }
+    }, 1200);
+
+  } else {
+    document.getElementById(ids[selectedIdx]).classList.add('wrong');
+    // Show correct answer
+    document.getElementById(ids[q.correct]).classList.add('correct');
+    hearts--;
+    updateHearts();
+    fb.style.color = 'var(--bit-red)';
+    fb.textContent = '✗ NOT QUITE...';
+
+    setTimeout(() => {
+      if (hearts <= 0) {
+        goTo('screen-gameover');
+      } else {
+        // Retry same question
+        loadQuestion(currentQ);
+      }
+    }, 1500);
+  }
+}
+
+function updateHearts() {
+  for (let i = 1; i <= 3; i++) {
+    const h = document.getElementById(`heart${i}`);
+    h.classList.toggle('lost', i > hearts);
+  }
+}
+
+// ═══════════════════════════════════════════
+//  INTERLUDE
+// ═══════════════════════════════════════════
+function startInterlude() {
+  const btn = document.getElementById('btn-interlude');
+  btn.style.display = 'none';
+  typewrite('txt-interlude',
+    "Almost there, love! This last one is the tricky one — but I know you've got this! You always do. 💪",
+    38,
+    () => { btn.style.display = 'block'; }
+  );
+}
+
+// ═══════════════════════════════════════════
+//  WIN SCREEN
+// ═══════════════════════════════════════════
+function startWin() {
+  const btn = document.getElementById('btn-win');
+  btn.style.display = 'none';
+  typewrite('txt-win',
+    "You did it!! I knew you would, bebynaa! Here is your birthday gift — you've earned it! 🎁🎉",
+    38,
+    () => { btn.style.display = 'block'; }
+  );
+}
+
+// ═══════════════════════════════════════════
+//  GIFT PAGE — envelope reveal
+// ═══════════════════════════════════════════
+function showEnvelope() {
+  const wrap = document.getElementById('envelope-wrap');
+  wrap.style.display = 'flex';
+}
+
+// ═══════════════════════════════════════════
+//  LETTER PAGE
+// ═══════════════════════════════════════════
+function initLetter() {
+  const el = document.getElementById('screen-letter');
+  el.style.display = 'flex';
+  el.scrollTo(0, 0);
+}
+
+function openLetterModal() {
+  document.getElementById('letter-modal').classList.add('open');
+}
+
+function confirmLetter(yes) {
+  document.getElementById('letter-modal').classList.remove('open');
+  if (yes) {
+    document.getElementById('letter-after').classList.add('open');
+  }
+  // "no" — just close and stay on letter
+}
+
+function goToCollage() {
+  document.getElementById('letter-after').classList.remove('open');
+  goTo('screen-collage');
+  startCollage();
+}
+
+// ═══════════════════════════════════════════
+//  COLLAGE PAGE
+// ═══════════════════════════════════════════
+function startCollage() {
+  startAudio();
+
+  // Build dummy collage photos
+  const bg = document.getElementById('collage-bg');
+  bg.innerHTML = '';
+
+  const dummies = ['🌸','📸','💕','✨','🌷','🎶','🏙️','☕','🛍️','🌅'];
+  const colors  = ['#fce4ec','#f0e6f6','#fff8f0','#e8f5e9','#e3f2fd','#fff3e0'];
+
+  const positions = [
+    {left:'2%',top:'5%',  w:'35%',h:'28%',rot:'-3deg'},
+    {left:'60%',top:'2%', w:'38%',h:'25%',rot:'4deg'},
+    {left:'5%',top:'36%', w:'28%',h:'30%',rot:'2deg'},
+    {left:'35%',top:'30%',w:'32%',h:'35%',rot:'-2deg'},
+    {left:'68%',top:'30%',w:'30%',h:'28%',rot:'5deg'},
+    {left:'0%',top:'68%', w:'40%',h:'30%',rot:'-4deg'},
+    {left:'42%',top:'68%',w:'32%',h:'30%',rot:'3deg'},
+    {left:'76%',top:'62%',w:'24%',h:'36%',rot:'-5deg'},
+  ];
+
+  const photos = [];
+  positions.forEach((pos, i) => {
+    const div = document.createElement('div');
+    div.className = 'collage-photo';
+    div.style.cssText = `left:${pos.left};top:${pos.top};width:${pos.w};height:${pos.h};transform:rotate(${pos.rot});background:${colors[i%colors.length]};display:flex;align-items:center;justify-content:center;font-size:2.5rem;`;
+    div.textContent = dummies[i % dummies.length];
+    bg.appendChild(div);
+    photos.push(div);
+  });
+
+  // Animate photos in one by one
+  photos.forEach((p, i) => {
+    setTimeout(() => {
+      p.style.transition = 'opacity 0.8s ease, transform 0.8s cubic-bezier(0.22,1,0.36,1)';
+      p.style.opacity = '1';
+      p.style.transform = p.style.transform.replace('rotate(','rotate(').split('rotate(')[0] + 'rotate(' + positions[i].rot + ')';
+      p.classList.add('arrived');
+    }, i * 600 + 500);
+  });
+
+  // Message timeline
+  const msg = document.getElementById('collage-msg');
+  msg.textContent = 'I made a little world just for you 🌸';
+
+  setTimeout(() => {
+    msg.style.opacity = '0';
+    setTimeout(() => {
+      msg.textContent = 'Are you happy with your present, my love? 🎁';
+      msg.style.opacity = '1';
+    }, 800);
+  }, 30000);
+
+  setTimeout(() => {
+    msg.style.opacity = '0';
+    setTimeout(() => {
+      msg.textContent = 'And lastly... I made this for us 🤍';
+      msg.style.opacity = '1';
+    }, 800);
+  }, 33000);
+
+  // Transition to our photos page after ~36s
+  setTimeout(() => { goTo('screen-ourphotos'); }, 36000);
+}
+
+// ═══════════════════════════════════════════
+//  OUR PHOTOS → CREDITS
+// ═══════════════════════════════════════════
+window.addEventListener('DOMContentLoaded', () => {
+  const op = document.getElementById('screen-ourphotos');
+  const mobs = new MutationObserver(() => {
+    if (op.classList.contains('active')) {
+      // After 10 seconds go to credits
+      setTimeout(() => { startCredits(); }, 10000);
+    }
+  });
+  mobs.observe(op, {attributes:true, attributeFilter:['class']});
+});
+
+function startCredits() {
+  goTo('screen-credits');
+  const scroll = document.getElementById('credits-scroll');
+  const duration = 18; // seconds
+  scroll.style.animation = `creditsRoll ${duration}s linear both`;
+}
+
+// ═══════════════════════════════════════════
+//  MUSIC — YouTube Shuffled Playlist
+//  Starts from Homepage, plays throughout
+// ═══════════════════════════════════════════
+const PLAYLIST = [
+  { title: "Underneath the Stars", artist: "Mariah Carey",        id: "pqJeHBqWWjY" },
+  { title: "Love",                 artist: "Keyshia Cole",         id: "hA5VtIe9jJ4" },
+  { title: "Be Your Girl",         artist: "Kaytranada",           id: "oDSaF3QXWXU" },
+  { title: "We Belong Together",   artist: "Mariah Carey",         id: "lDMFzGorZhE" },
+  { title: "Best Friend",          artist: "Brandy",               id: "k6O-h9M4Muk" },
+  { title: "Me, Myself and I",     artist: "Beyoncé",              id: "NE-6atUAoR4" },
+  { title: "Chances",              artist: "Kaytranada",           id: "xJXORXDt9LY" },
+  { title: "Put Your Records On",  artist: "Corinne Bailey Rae",   id: "AyvkNZaRelo" }
+];
+
+let ytPlayer     = null;
+let shuffledList = [];
+let currentTrack = 0;
+let musicReady   = false;
+let musicStarted = false;
+
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// Called automatically by YouTube IFrame API when ready
+function onYouTubeIframeAPIReady() {
+  shuffledList = shuffleArray(PLAYLIST);
+  ytPlayer = new YT.Player('yt-player', {
+    height: '1', width: '1',
+    videoId: shuffledList[0].id,
+    playerVars: {
+      autoplay: 0, controls: 0, disablekb: 1,
+      fs: 0, modestbranding: 1, playsinline: 1
+    },
+    events: {
+      onReady:       onPlayerReady,
+      onStateChange: onPlayerStateChange
+    }
+  });
+}
+
+function onPlayerReady() {
+  musicReady = true;
+  ytPlayer.setVolume(55);
+  // If music was requested before player was ready, start now
+  if (musicStarted) ytPlayer.playVideo();
+}
+
+function onPlayerStateChange(e) {
+  // When a video ends, play the next one
+  if (e.data === YT.PlayerState.ENDED) {
+    currentTrack = (currentTrack + 1) % shuffledList.length;
+    // Re-shuffle when we finish the full list
+    if (currentTrack === 0) shuffledList = shuffleArray(PLAYLIST);
+    ytPlayer.loadVideoById(shuffledList[currentTrack].id);
+    ytPlayer.playVideo();
+  }
+}
+
+function startAudio() {
+  musicStarted = true;
+  if (musicReady && ytPlayer) {
+    ytPlayer.playVideo();
+  }
+  // If not ready yet, onPlayerReady will start it
+}
+
+// ═══════════════════════════════════════════
+//  COLLAGE msg transition style
+// ═══════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  const msg = document.getElementById('collage-msg');
+  if(msg) msg.style.transition = 'opacity 0.8s ease';
+});
+</script>
+</body>
+</html>
